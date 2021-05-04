@@ -1,0 +1,11 @@
+<div class="box">
+    <div class="box-body">
+        <div ng-if="role.permissions.length > 0">
+            <input type="text" class="form-control" ng-model="myQuery" placeholder="Search permissions">
+            <div ivh-treeview="role.permissions" ivh-treeview-expand-to-depth="1" ivh-treeview-use-checkboxes="false" ivh-treeview-filter="myQuery"></div>
+        </div>
+
+        <div ng-if="role.permissions.length == 0"> No any permissions </div>
+
+    </div>
+</div>

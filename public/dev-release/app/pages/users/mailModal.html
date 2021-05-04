@@ -1,0 +1,21 @@
+<div class="modal-content" ng-if="displayEditor">
+    <div class="modal-header">
+        <h4 class="modal-title text-center" id="myModalLabel">Mail Confirmation</h4>
+    </div>
+    <div class="modal-body">
+        <div>
+            <label>Mail Subject</label>
+            <input type="text" placeholder="Please enter mail subject" ng-model="formscope.mailSubject" class="form-control">            
+        </div>
+        <div style="margin-top: 10px;">
+            <label style="display: block;">Mail Body</label>
+            <text-angular placeholder="Please enter mail body" ng-model="formscope.mailContent" ta-toolbar="[['h1','h2','h3','h4','h5','h6','p'],['bold','italics','underline']]"></text-angular>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="row col-md-12 text-center">
+            <a type="submit" ng-click="sendMail()" class="btn btn-success">Send Mail</a>
+            <a type="submit" ng-click="donotsendMail()" class="btn btn-danger">Do Not Send Mail</a>
+        </div>
+    </div>
+</div>

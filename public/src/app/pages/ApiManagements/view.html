@@ -1,0 +1,12 @@
+<div class="widgets">
+   <div class="row">
+      <div class="col-md-12">
+         <div ba-panel="" ba-panel-title="{{ pageName }} Listing">
+            <div class="form-group select-page-size-wrap"><button class="btn btn-primary" ng-if="havePermission('api_managements','create');" ui-sref="ApiManagements.add">Add</button></div>
+            <div class="horizontal-scroll">
+               <table datatable="" dt-instance="dtInstance" dt-options="dtOptions" dt-columns="dtColumns" class="row-border hover"></table>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

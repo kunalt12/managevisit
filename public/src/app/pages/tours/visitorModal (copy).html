@@ -1,0 +1,144 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
+      <em class="ion-ios-close-empty sn-link-close"></em>
+    </button>
+        <h4 class="modal-title" id="myModalLabel">Add Visitor</h4>
+    </div>
+    <form ng-submit="add_data(add_form)" role="form" name="add_form">
+        <div class="modal-body">
+            <p>Add visitor information.</p> {{formscope.first_name}}
+            <div class="row">
+                <div class="form-group col-lg-4 col-md-12 col-sm-12">
+                    <label for="input01">First Name<code>*</code> </label>
+                    <!--<angucomplete-alt id="ex4" placeholder="Please enter first name" pause="100" initial-value="formscope.first_name" 
+                        selected-object="visitorSelected" local-data="visitorsOption" search-fields="first_name" title-field="first_name" 
+                        minlength="2" input-class="form-control" match-class="highlight" field-required="true" auto-match="true" 
+                        override-suggestions="true" ng-model="formscope.first_name" name="first_name" description-field="email"/>-->
+
+                    <input type="text" class="form-control" ng-model="formscope.first_name" placeholder="Please enter first name" name="first_name" required-error-message="{{errorMessage.first_name.required}}" minlength-error-message="{{errorMessage.first_name.minlength}}"
+                        maxlength-error-message="{{errorMessage.first_name.maxlength}}" validator="required, minlength=2, maxlength=20" valid-method="blur" chars="letters"
+                        ng-blur="checkPhoneNumber('first_name', formscope.first_name)">
+                </div>
+
+                <div class="form-group col-lg-4 col-md-12 col-sm-12">
+                    <label for="input01">Middle Name</label>
+                    <input type="text" class="form-control" ng-model="formscope.middle_name" placeholder="Please enter first name" name="middle_name">
+                </div>
+
+                <div class="form-group col-lg-4 col-md-12 col-sm-12">
+                    <label for="input01">Last Name<code>*</code></label>
+                    <!--<angucomplete-alt id="ex4" placeholder="Please enter first name" pause="100" initial-value="formscope.last_name" 
+                        selected-object="visitorSelected" local-data="visitorsOption" search-fields="name" title-field="name" 
+                        minlength="2" input-class="form-control" match-class="highlight" field-required="true" auto-match="true" 
+                        override-suggestions="true" ng-model="formscope.last_name" name="last_name" description-field="email"/>-->
+                        
+                    <input type="text" class="form-control" ng-model="formscope.last_name" placeholder="Please enter Last name" name="last_name" required-error-message="{{errorMessage.last_name.required}}" minlength-error-message="{{errorMessage.last_name.minlength}}" maxlength-error-message="{{errorMessage.last_name.maxlength}}"
+                        validator="required, minlength=2, maxlength=20" valid-method="blur" chars="letters"
+                        ng-blur="checkPhoneNumber('last_name', formscope.last_name)">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                    <label for="input01">Email<code>*</code></label>
+                    <!--<angucomplete-alt id="ex4" placeholder="Please enter first name" pause="100" initial-value="formscope.email" 
+                        selected-object="visitorSelected" local-data="visitorsOption" search-fields="email" title-field="email" 
+                        minlength="2" input-class="form-control" match-class="highlight" field-required="true" auto-match="true" 
+                        override-suggestions="true" ng-model="formscope.email" name="email" description-field="email"/>-->
+
+                    <input type="email" class="form-control" ng-model="formscope.email" placeholder="Please enter email" name="email" 
+                        ng-blur="checkPhoneNumber('email', formscope.email)"
+                        required-error-message="{{errorMessage.email.required}}" email-error-message="{{errorMessage.email.invalidEmail}}"                        
+                        minlength-error-message="{{errorMessage.email.minlength}}" maxlength-error-message="{{errorMessage.email.maxlength}}" validator="required, email, minlength=2, maxlength=100" valid-method="blur">
+                </div>
+
+                <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                    <label for="input04">Mobile<code>*</code></label>
+                    <input type="text" class="form-control" ng-blur="checkPhoneNumber('mobile', formscope.mobile)" ng-model="formscope.mobile" placeholder="Please enter your mobile number" phone-input name="mobile" required-error-message="{{errorMessage.mobile.required}}" maxlength-error-message="{{errorMessage.mobile.maxlength}}"
+                        minlength-error-message="{{errorMessage.mobile.minlength}}" validator="required, maxlength=15, minlength=10" valid-method="blur" chars="numbers">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                    <label for="input04">Alternate Phone Number</label>
+                    <input type="text" class="form-control" ng-model="formscope.phone_number" placeholder="Please enter your alternate phone number" phone-input name="phone_number" chars="numbers">
+                </div>
+
+                <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                    <label for="input04">Gender</label>
+                    <select chosen ng-model="formscope.gender" name="gender" ng-options="company.value as company.label for company in genderOption" class="form-control"></select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-lg-4 col-md-12 col-sm-12">
+                    <label for="textarea01">Visitor Type<code>*</code></label>
+                    <select chosen ng-model="formscope.visitor_type" name="visitor_type" ng-options="company.id as company.name for company in VisitorOption" 
+                        class="form-control" required-error-message="{{errorMessage.visitor_type.required}}" 
+                        validator="required" valid-method="blur" validation-group="visitor_type_error_message"></select>
+                        <span id="visitor_type_error_message"></span>
+                </div>
+
+                <div class="form-group col-lg-4 col-md-12 col-sm-12">
+                    <label for="textarea01">Organization Type</label>
+                    <select chosen ng-model="formscope.organization_id" name="organization_id" ng-options="company.id as company.name for company in OrganizationOption" class="form-control"></select>
+                </div>
+
+                <div class="form-group col-lg-4 col-md-12 col-sm-12">
+                    <label for="input01">Organization Name</label>
+                    <angucomplete-alt id="ex1"
+                        placeholder="Please enter organization name"
+                        pause="100" initial-value="formscope.organization"
+                        selected-object="residentSelected"
+                        local-data="organizationNameOption"
+                        search-fields="organization" title-field="organization" minlength="1"
+                        input-class="form-control" match-class="highlight"
+                        auto-match="true" override-suggestions="true"/>
+                    <!--<input type="text" class="form-control" ng-model="formscope.organization" placeholder="Please enter Last name" name="organization" required-error-message="{{errorMessage.organization.required}}" minlength-error-message="{{errorMessage.organization.minlength}}" maxlength-error-message="{{errorMessage.organization.maxlength}}"
+                        validator="required, minlength=2, maxlength=100" valid-method="blur" chars="letters">-->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                    <label>Street 1</label>
+                    <input type="text" class="form-control" ng-model="formscope.address" placeholder="Please enter Street 1" name="address" chars="text">
+                </div>
+
+                <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                    <label>Street 2</label>
+                    <input type="text" class="form-control" ng-model="formscope.address1" placeholder="Please enter Street 2" name="address1" chars="text">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                    <label>Country</label>
+                    <select chosen ng-model="formscope.country_id" name="country_id" ng-options="country.id as country.country_name for country in countries" class="form-control"></select>
+                </div>
+
+                <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                    <label>State</label>
+                    <input type="text" class="form-control" ng-model="formscope.state" placeholder="Please enter state name" name="state" chars="text">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                    <label>City</label>
+                    <input type="text" class="form-control" ng-model="formscope.city" placeholder="Please enter city name" name="city" chars="text">
+                </div>
+
+                <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                    <label>Zip Code</label>
+                    <input type="text" placeholder="Please enter zip code" class="form-control" name="zip_code" ng-model="formscope.zip_code" chars="numbers"/>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" ng-disabled="isSubmitted" class="btn btn-success" align="center">{{btnName}}</button>
+        </div>
+    </form>
+</div>

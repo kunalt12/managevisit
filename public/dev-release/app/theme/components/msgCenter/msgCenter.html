@@ -1,0 +1,60 @@
+<div ng-if="auth_user">
+    <cc-auto-refresh-fn refresh-fn="refreshList()" refresh-interval="refreshOpts.interval" refresh-model="list" refresh-paused="refreshOpts.paused" refresh-busy="refreshBusy" refresh-on-refreshed="setLastRefreshed(eventArgs)"></cc-auto-refresh-fn>
+</div>
+
+<ul class="al-msg-center clearfix">
+    <li uib-dropdown>
+        <a href uib-dropdown-toggle>
+            <i class="fa fa-bell-o"></i>
+            <span ng-if="notification_old_count != 0">{{notification_old_count}}</span>
+            <div class="notification-ring"></div>
+        </a>
+        <div uib-dropdown-menu class="top-dropdown-menu">
+            <i class="dropdown-arr"></i>
+            <div class="header clearfix">
+                <strong>Notifications</strong>
+                <a ng-click="markReadTopNotification()" ng-if="notification_old_count != 0" href>Mark All as Read</a>
+                <!--<a href>Settings</a>-->
+            </div>
+            <div class="msg-list">
+                <a href class="clearfix cursorDefault" ng-repeat="msg in notification_old_data">
+                    <div class="img-area">
+                        <img ng-if="msg.user.image != ''" ng-class="{'photo-msg-item' : !msg.user.image}" ng-src="{{imagePath}}{{msg.user.id}}/{{msg.user.image}}">
+                        <img ng-if="msg.user.image == ''" ng-class="{'photo-msg-item' : !msg.user.image}" ng-src="{{::( msg.user.image ||  dummyImage )}}">
+                    </div>
+
+                    <div class="msg-area">
+                        <div>{{msg.message}}</div>
+                        <!--<span am-time-ago="msg.created_at"></span>-->
+                        <span am-time-ago="msg.created_at | amUtc | amLocal"></span>
+
+                        <!--{{msg.created_at|fromNow}}-->
+                        <!--<span>{{ msg.created_at | amUtc | amLocal | amDateFormat:'DD-MM-YYYY h:mm A' }}</span>-->
+                    </div>
+                </a>
+            </div>
+            <a ui-sref='notifications'>See all notifications</a>
+        </div>
+    </li>
+    <!--<li uib-dropdown>
+        <a href class="msg" uib-dropdown-toggle>
+            <i class="fa fa-envelope-o"></i>
+            <div class="notification-ring"></div>
+        </a>
+        <div uib-dropdown-menu class="top-dropdown-menu">
+            <i class="dropdown-arr"></i>
+            <div class="header clearfix">
+                <strong>Messages</strong>
+            </div>
+            <div class="msg-list">
+                <a href class="clearfix" ng-repeat="msg in messages">
+                    <div class="img-area"><img class="photo-msg-item" ng-src="{{::( users[msg.userId].name | profilePicture )}}"></div>
+                    <div class="msg-area">
+                        <div>{{ msg.text }}</div>
+                        <span>{{ msg.time }}</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </li>-->
+</ul>

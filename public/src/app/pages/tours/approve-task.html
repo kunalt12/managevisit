@@ -1,0 +1,28 @@
+<div class="col-md-4 ng-scope">
+    <div class="panel panel-default bootstrap-panel">
+        <div class="panel-heading">
+            {{
+                task.acknowledge == 0 ? 'Please approve your task!' :
+             task.acknowledge == 1 ? 'Your task has been approved!' :
+              'Your task has been rejected!'
+            }}
+        </div>
+        <div class="panel-body pading1522" style="padding: 15px 22px;">
+            <p class="ng-binding">
+                <label>Task Assigned:</label> {{task.task}}</p>
+            <p><span class="ng-binding"><label>Tour Name:</label> {{tour.name}}</span></p>
+            <p><span class="ng-binding"><label>Tour Date:</label> {{task.created_at | date}}</span></p>
+            <p><span class="ng-binding"><label>Tour Manager:</label> {{tour.tour_manager.name}}</span></p>
+            <p><span class="ng-binding"><label>Manager Email:</label> {{tour.tour_manager.email}}</span></p>
+            <p><span class="ng-binding"><label>Manager Mobile:</label> {{tour.tour_manager.mobile}}</span></p>
+            <p><span class="ng-binding"><label>Task Status:</label>
+                    {{task.acknowledge == 0 ? 'Pending' : task.acknowledge == 1 ? 'Approved' : 'Rejected'}}</span></p>
+            <p ng-if="task.acknowledge == 0">
+                <button type="submit" ng-disabled="isSubmitted" ng-click="approveRejectTour(1)" class="btn btn-success"
+                    align="center">Approve</button>
+                <button type="submit" ng-disabled="isSubmitted" ng-click="approveRejectTour(2)" class="btn btn-danger"
+                    align="center">Reject</button>
+            </p>
+        </div>
+    </div>
+</div>

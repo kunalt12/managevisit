@@ -1,0 +1,417 @@
+<div class="widgets">
+    <div class="viewTourMain">
+        <div class="message">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="with-line">
+                        <!-- ng-hide='"+full.status+" == 4'-->
+                        <a ng-show="editTourBtn" class="btn btn-primary ng-scope pull-right" style="margin-left: 10px;" ng-if="havePermission('tours','update');" ui-sref='tours.edit({ id: formscope.id })'>Edit</a>
+                        <button ui-sref="tours.list" type="button" class="back-button btn btn-default btn-with-icon pull-right"><i class="ion-chevron-left"></i>Back</button> {{pageName}}
+                    </h3>
+                    <div ba-panel ba-panel-class="with-scroll horizontal-tabs tabs-panel medium-panel" style="height: auto !important;">
+                        <uib-tabset active="$tabSetStatus.activeTab">
+                            <uib-tab heading="Tour Information">
+                                <div class="form-group col-md-6">
+                                    <h3 class="with-line">Contact Person Information</h3>
+                                    <div class="form-group row clearfix">
+                                        <label class="col-xs-12 col-sm-3">Name:</label>
+                                        <div class="col-xs-12 col-sm-9">{{contactManagerDetails.visitor.name}}</div>
+                                    </div>
+
+                                    <div class="form-group row clearfix">
+                                        <label class="col-xs-12 col-sm-3">Email:</label>
+                                        <div class="col-xs-12 col-sm-9">{{contactManagerDetails.visitor.email}}</div>
+                                    </div>
+
+                                    <div class="form-group row clearfix">
+                                        <label class="col-xs-12 col-sm-3">Mobile:</label>
+                                        <div class="col-xs-12 col-sm-9">{{contactManagerDetails.visitor.mobile | tel}}</div>
+                                    </div>
+
+                                    <div class="form-group row clearfix">
+                                        <label class="col-xs-12 col-sm-3">Organization:</label>
+                                        <div class="col-xs-12 col-sm-9">{{contactManagerDetails.visitor.organization}}</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <h3 class="with-line">Tour Manager Information</h3>
+                                    <div ng-if="formscope.manager">
+                                        <div class="form-group row clearfix">
+                                            <label class="col-xs-12 col-sm-3">Name:</label>
+                                            <div class="col-xs-12 col-sm-9">{{formscope.tour_manager.name}}</div>
+                                        </div>
+
+                                        <div class="form-group row clearfix">
+                                            <label class="col-xs-12 col-sm-3">Email:</label>
+                                            <div class="col-xs-12 col-sm-9">{{formscope.tour_manager.email}}</div>
+                                        </div>
+
+                                        <div class="form-group row clearfix">
+                                            <label class="col-xs-12 col-sm-3">Phone:</label>
+                                            <div class="col-xs-12 col-sm-9">{{formscope.tour_manager.phone_number | tel}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-12">
+                                    <h3 class="with-line">Tour Information</h3>
+                                    <div class="form-group col-md-6">
+                                        <div class="form-group row clearfix">
+                                            <label class="col-xs-12 col-sm-3">Name:</label>
+                                            <div class="col-xs-12 col-sm-9">{{formscope.name}}</div>
+                                        </div>
+
+                                        <div class="form-group row clearfix">
+                                            <label class="col-xs-12 col-sm-3">Organization:</label>
+                                            <div class="col-xs-12 col-sm-9">{{formscope.organization}}</div>
+                                        </div>
+
+                                        <div class="form-group row clearfix">
+                                            <label class="col-xs-12 col-sm-3">Tour Date:</label>
+                                            <div class="col-xs-12 col-sm-9">{{formscope.start_date | amDateFormat:'(dddd) DD, MMMM YYYY'}}</div>
+                                        </div>
+
+                                        <div class="form-group row clearfix">
+                                            <label class="col-xs-12 col-sm-3">Transport Type:</label>
+                                            <div class="col-xs-12 col-sm-9">{{formscope.tour_transport.name}}</div>
+                                        </div>
+
+                                        <div class="form-group row clearfix">
+                                            <label class="col-xs-12 col-sm-3">Tour Type:</label>
+                                            <div class="col-xs-12 col-sm-9">{{formscope.tour_tapes.name || '-'}}</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <div class="form-group row clearfix">
+                                            <label class="col-xs-12 col-sm-3">Visitor Category:</label>
+                                            <div class="col-xs-12 col-sm-9">{{visitorcategory}}</div>
+                                        </div>
+
+                                        <div class="form-group row clearfix">
+                                            <label class="col-xs-12 col-sm-3">Special Request:</label>
+                                            <div class="col-xs-12 col-sm-9">{{formscope.special_request}}</div>
+                                        </div>
+
+                                        <div class="form-group row clearfix">
+                                            <label class="col-xs-12 col-sm-3">Person:</label>
+                                            <div class="col-xs-12 col-sm-92 col-sm-3">
+                                                <p><span>Children:</span> {{formscope.children}}</p>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-3">
+                                                <p><span>Adults:</span> {{formscope.adults}}</p>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-3">
+                                                <p><span>Senior:</span> {{formscope.senior}}</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row clearfix">
+                                            <label class="col-xs-12 col-sm-3">Total Guests:</label>
+                                            <div class="col-xs-12 col-sm-9">{{formscope.total_guest}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <div class="form-group col-xs-12 col-lg-6 col-md-12 col-sm-12">
+                                            <h3 class="with-line">
+                                                <a type="submit" ng-if="tourCompleted && havePermission('document_in_tour','create')" ng-click="addDocument()" class="pull-right btn btn-success" align="Add Document">Add</a>Documents Information
+                                            </h3>
+                                            <div class="horizontal-scroll">
+                                                <table datatable="ng" dt-instance="documentInstance" dt-options="documentOptions" dt-column-defs="dtColumnDefs" class="row-border hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>No</th>
+                                                            <th>Title</th>
+                                                            <th>Link</th>
+                                                            <th>User</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="doc in docList">
+                                                            <td>{{$index+1}}</td>
+                                                            <td>{{doc.title}}</td>
+                                                            <td><a target="_blank" href="{{doc.link}}">View</a></td>
+                                                            <td>{{doc.name}}</td>
+                                                            <td>
+                                                                <a ng-if="havePermission('document_in_tour','update') && tourCompleted && loginID == doc.created_by" ng-click="editDocument(doc, $index);"><i class="fa fa-edit"></i></a>
+                                                                <a ng-if="havePermission('document_in_tour','delete') && tourCompleted && loginID == doc.created_by" ng-confirm-click="Are you sure to delete this document?" confirmed--click="removeDoc($index)"><i class="fa fa-trash-o"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-xs-12 col-lg-6 col-md-12 col-sm-12">
+                                            <h3 class="with-line">
+                                                <a type="submit" ng-if="tourCompleted && havePermission('note_in_tour','create')" ng-click="addNote()" class="pull-right btn btn-success" align="Add Note">Add</a> Notes
+                                            </h3>
+                                            <div class="horizontal-scroll">
+                                                <table datatable="ng" dt-instance="notesInstance" dt-options="notesOptions" dt-column-defs="notesColumnDefs" class="row-border hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>No</th>
+                                                            <th>Note</th>
+                                                            <th>User</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="note in notes">
+                                                            <td>{{$index+1}}</td>
+                                                            <td>{{note.note}}</td>
+                                                            <td>{{note.name}}</td>
+                                                            <td>
+                                                                <a ng-if="havePermission('note_in_tour','update') && tourCompleted && loginID == note.created_by" ng-click="editNote(note, $index);"><i class="fa fa-edit"></i></a>
+                                                                <a ng-if="havePermission('note_in_tour','delete') && tourCompleted && loginID == note.created_by" ng-confirm-click="Are you sure to delete this note?" confirmed--click="removeNotes($index)"><i class="fa fa-trash-o"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <div class="form-group col-md-4" ng-if="havePermission('tours','updatestatus');">
+                                            <h3 class="with-line">Tour Status</h3>
+                                            <select chosen ng-change="changeStatus(formscope.status);" ng-model="formscope.status" name="status" ng-options="type.value as type.label disable when type.isDisabled for type in tourStatusOption" class="form-control"></select>
+                                        </div>
+
+                                        <div class="form-group col-md-12">
+                                            <!--<h3 class="with-line">Activity</h3>-->
+                                            <div ba-panel ba-panel-title="Activity" ba-panel-class="with-scroll" ng-if="activity.length">
+                                                <div class="horizontal-scroll" style="padding: 15px">
+                                                    <table datatable="ng" dt-instance="historyInstance" dt-options="historyOptions" dt-column-defs="historyColumnDefs" class="row-border hover">
+                                                        <thead>
+                                                            <tr class="sortable ">
+                                                                <th>Activity</th>
+                                                                <th>Date Time</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="visitor in activity">
+                                                                <td>{{visitor.activity}}</td>
+                                                                <td>{{visitor.created_at | amUtc | amLocal | amDateFormat:'DD-MM-YYYY h:mm A'}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!--<div class="horizontal-scroll" style="padding: 15px">
+                                                    <div class="form-group select-page-size-wrap ">
+                                                        <label>Rows on page
+                                                            <select class="show-tick" title="Rows on page" ng-model="smartTablePageSize1" ng-options="i for i in [10,25,50,100]"></select>
+                                                        </label>
+                                                    </div>
+                                                    <table class="table table-striped" st-table="activity" ng-if="activity.length && showTable === true">
+                                                        <thead>
+                                                            <tr class="sortable">
+                                                                <th>Name</th>
+                                                                <th>Date Time</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="visitor in activity">
+                                                                <td>{{visitor.activity}}</td>
+                                                                <td>{{visitor.created_at | amUtc | amLocal | amDateFormat:'DD-MM-YYYY h:mm a'}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <td colspan="6" class="text-center">
+                                                                    <div st-pagination="" st-items-by-page="smartTablePageSize1" st-displayed-pages="10"></div>
+                                                                </td>
+                                                            </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </uib-tab>
+
+                            <uib-tab heading="Tour Task">
+                                <div class="form-group col-md-12">
+                                    <button ng-show="tourCompleted"  ng-if="havePermission('tourtasks','create');" class="btn btn-primary" ng-click="addTask()">Add Task</button>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <div class="horizontal-scroll">
+                                        <table class="table table-bordered table-hover table-condensed" ng-if="showTable === true">
+                                            <tr>
+                                                <td>Task</td>
+                                                <td>Assign User</td>
+                                                <td>Status</td>
+                                                <td>Actions</td>
+                                            </tr>
+                                            <tr ng-repeat="user in formscope.tasks" class="editable-row">
+                                                <td>
+                                                    <span editable-text="user.task" e-chars="alpha-numeric" e-name="task" e-form="rowform" e-required onbeforesave="checkTask($data)">{{ user.task || 'empty' }}</span>
+                                                </td>
+                                                <td class="select-td">
+                                                    <span editable-select="user.user_id" e-name="user_id" e-form="rowform" e-selectpicker e-ng-options="s.id as s.name disable when s.isDisabled  for s in volunteersOption" onbeforesave="checkStatus($data)">{{ showUsers(user) }}</span>
+                                                </td>
+                                                <td class="select-td">
+                                                    <span>{{ showStatus(user) }}</span>
+                                                </td>
+                                                <td>
+                                                    <form onbeforesave="add_data($data, user.id, $index)" role="form" editable-form name="rowform" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == user">
+                                                        <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary editable-table-button btn-xs">Save</button>
+                                                        <button ng-if="user.id == null" type="button" ng-disabled="rowform.$waiting" ng-click="cancelRow($index)" class="btn btn-default editable-table-button btn-xs">Cancel</button>
+                                                        <button ng-if="user.id != null" type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default editable-table-button btn-xs">Cancel</button>
+                                                    </form>
+                                                    <div class="buttons" ng-show="!rowform.$visible">
+                                                        <button ng-if="tourCompleted && havePermission('tourtasks','update');" class="btn btn-primary editable-table-button btn-xs" ng-click="rowform.$show()">Edit</button>
+                                                        <button ng-if="tourCompleted && havePermission('tourtasks','delete');" class="btn btn-danger editable-table-button btn-xs" ng-confirm-click="Are you sure to delete this task?" confirmed-click="removeUser($index, user.id)">Delete</button>
+
+                                                        <div ng-if="user.acknowledge == 0 && userID == user.user_id">
+                                                            <button ng-if="tourCompleted && havePermission('tourtasks','accept')" class="btn btn-primary editable-table-button btn-xs" ng-click="actionTask(user.id, 1, $index)">Accept</button>
+                                                            <button ng-if="tourCompleted && havePermission('tourtasks','reject')" class="btn btn-danger editable-table-button btn-xs" ng-confirm-click="Are you sure to reject this task?" confirmed-click="actionTask(user.id, 2, $index)">Reject</button>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </uib-tab>
+
+                            <uib-tab heading="Feedback" ng-if="formscope.tour_feedback">
+                                <div class="form-group col-md-6">
+                                    <!--<h3 class="with-line">Contact Person Information</h3>-->
+                                    <div class="form-group row clearfix">
+                                        <label class="col-xs-2">Rating:</label>
+                                        <div class="col-xs-9">{{formscope.tour_feedback.rating}}</div>
+                                    </div>
+
+                                    <div class="form-group row clearfix">
+                                        <label class="col-xs-2">Comment:</label>
+                                        <div class="col-xs-9">{{formscope.tour_feedback.comment}}</div>
+                                    </div>
+                                </div>
+                            </uib-tab>
+
+                            <uib-tab heading="Visitors Information">
+                                <div ba-panel ba-panel-title="Visitors" ba-panel-class="with-scroll" ng-if="visitors.length">
+                                    <div class="horizontal-scroll" style="padding: 15px">
+                                        <!--<div class="form-group select-page-size-wrap ">
+                                            <label>Rows on page
+                                            <select class="show-tick" title="Rows on page" 
+                                                    ng-model="smartTablePageSize" ng-options="i for i in [5,10,15,20,25]">
+                                            </select>
+                                            </label>
+                                        </div>
+                                        <table class="table table-striped" st-table="visitors" ng-if="visitors.length && showTable === true">
+                                            <thead>
+                                                <tr class="sortable ">
+                                                    <th st-sort="name">Name</th>
+                                                    <th st-sort="email">email</th>
+                                                    <th st-sort="mobile">Mobile</th>
+                                                    <th st-sort="organization_txt">Organization type</th>
+                                                    <th st-sort="visitor_txt">Type</th>
+                                                    <th st-sort="organization">Organization</th>
+                                                </tr>
+                                                <tr>
+                                                    <th><input st-search="name" placeholder="Search name" class="input-sm form-control search-input" type="search" /></th>
+                                                    <th><input st-search="email" placeholder="Search email" class="input-sm form-control search-input" type="search" /></th>
+                                                    <th><input st-search="mobile" placeholder="Search mobile" class="input-sm form-control search-input" type="search" /></th>
+                                                    <th><input st-search="organization_txt" placeholder="Search organization" class="input-sm form-control search-input" type="search" /></th>
+                                                    <th><input st-search="visitor_txt" placeholder="Search type" class="input-sm form-control search-input" type="search" /></th>
+                                                    <th><input st-search="organization" placeholder="Search organization" class="input-sm form-control search-input" type="search" /></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="visitor in visitors">
+                                                    <td>{{visitor.name}}</td>
+                                                    <td><a class="email-link" ng-href="mailto:{{visitor.email}}">{{visitor.email}}</a></td>
+                                                    <td>{{visitor.mobile}}</td>
+                                                    <td>{{visitor.organization_txt}}</td>
+                                                    <td>{{visitor.visitor_txt}}</td>
+                                                    <td>{{visitor.organization}}</td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="6" class="text-center">
+                                                        <div st-pagination="" st-items-by-page="smartTablePageSize" st-displayed-pages="5"></div>
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>-->
+                                        <table datatable="ng" dt-instance="visitorInstance" dt-options="visitorOptions" dt-column-defs="visitorColumnDefs" class="row-border hover">
+                                            <thead>
+                                                <tr class="sortable ">
+                                                    <th>Name</th>
+                                                    <th>Email</th>
+                                                    <th>Mobile</th>
+                                                    <th>Organization type</th>
+                                                    <th>Type</th>
+                                                    <th>Organization</th>
+                                                    <th>Momento</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="visitor in visitors">
+                                                    <td>{{visitor.name}}</td>
+                                                    <td><a class="email-link" ng-href="mailto:{{visitor.email}}">{{visitor.email}}</a></td>
+                                                    <td>{{visitor.mobile}}</td>
+                                                    <td>{{showOrganizationTypeOption(visitor)}}</td>
+                                                    <td>{{showVisitorOption(visitor)}}</td>
+                                                    <td>{{visitor.organization}}</td>
+                                                    <td>{{visitor.momentos_name || '-'}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!--<div class="col-md-4" ng-repeat="visitor in visitors">
+                                    <div class="panel panel-default bootstrap-panel">
+                                        <div class="panel-heading">
+                                            {{visitor.name}} ({{visitor.gender_txt}})
+                                        </div>
+                                        <div class="panel-body pading1522" style="padding: 15px 22px;">
+                                            <p><label>Email:</label> {{visitor.email}}</p>
+                                            <p><label>Contact Number:</label> {{visitor.phone_number}}, {{visitor.mobile}} </p>
+                                            <p><label>Organization Type:</label> {{visitor.organization_txt}}</p>
+                                            <p><label>Visitor Type:</label> {{visitor.visitor_txt}}</p>
+                                            <p><label>Address:</label> {{visitor.address}}</p>
+                                        </div>
+                                    </div>
+                                </div>-->
+                            </uib-tab>
+
+                            <uib-tab heading="Meals Information" ng-if="formscope.meals">
+                                <div class="col-md-4" ng-repeat="meal in mealsType">
+                                    <div class="panel panel-default bootstrap-panel">
+                                        <div class="panel-heading">
+                                            {{showMealsTypeOption(meal)}}
+                                        </div>
+                                        <div class="panel-body pading1522" style="padding: 15px 22px;">
+                                            <p><label>Specific item:</label> {{meal.specific_item}}</p>
+                                            <p>
+                                                <span><label>Catering manager:</label> {{showCateringManager(meal)}}</span>
+                                            </p>
+                                            <p>
+                                                <span><label>People:</label> {{meal.people}}</span>
+                                            </p>
+                                            <p><label>Meal Service:</label> {{showMealServiceTypeOption(meal)}}</p>
+                                            <p><label>Meal Location:</label> {{showMealServiceLocationsOption(meal)}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </uib-tab>
+                        </uib-tabset>
+                    </div>
+                    <!--<div ba-panel ba-panel-title="{{pageName}}" ba-panel-class="with-scroll"></div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

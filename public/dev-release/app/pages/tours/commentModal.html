@@ -1,0 +1,19 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
+      <em class="ion-ios-close-empty sn-link-close"></em>
+    </button>
+    <h4 class="modal-title" id="myModalLabel">Comment</h4>
+  </div>
+  <form name="linkForm">
+    <div class="modal-body">
+      <div class="form-group">
+        <textarea placeholder="Please enter comment" class="form-control" ng-model="comment" name="comment" chars="text"></textarea>
+      </div>
+      <span style='color:red;' ng-if="message"> {{message}} </span>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" ng-click="ok(comment)">Comment</button>
+    </div>
+  </form>
+</div>

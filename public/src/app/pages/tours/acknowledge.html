@@ -1,0 +1,274 @@
+<div class="message-container" style="border-left: none; width: 100%; background-color: #fff !important;">
+    <div class="message more-text-widget" ng-if="formscope.link_expired == 1 && isSubmitted == !1">
+        <p style="color: #e85656; font-size: 20px;">{{formscope.errorMessage}}</p>
+    </div>
+    <div class="message" ng-if="formscope.link_expired == 2 && isSubmitted == !1">
+        <div class="row" style="padding-right: 1%;">
+            <div class="message-details more-text-widget" ng-if="formscope.status == 1">
+                <p style="color: #209e91; font-size: 18px;">You have acknowledge the tour Successfully!</p>
+            </div>
+            <div class="message-details more-text-widget" ng-if="formscope.status == 2">
+                <p style="color: #e85656; font-size: 18px;">You have rejected the tour!!!</p>
+            </div>
+        </div>
+
+        <div class="message-details">
+            <span class="subject">Tour Contact Person Information</span>
+        </div>
+        <div class="line"></div>
+
+        <div class="person-info row">
+            <div class="col-lg-4 col-md-12 no-padding">
+                <div class="name">
+                    <h2 class="name-h">{{contactManagerDetails.visitor.name || '-'}}</h2>
+                    <div>
+                        <span
+                            class="mail-tag tag label label-success">{{showVisitorOption(contactManagerDetails.visitor) || '-'}}</span>
+                        <span
+                            class="mail-tag tag label label-info">{{showGenderOption(contactManagerDetails.visitor) || '-'}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-xs-12 no-padding">
+                <div class="contact-info phone-email">
+                    <div>
+                        <i class="ion-iphone"></i>
+                        <span class="phone">{{contactManagerDetails.visitor.mobile | tel}}</span>
+                    </div>
+                    <div ng-if="contactManagerDetails.visitor.phone_number">
+                        <i class="ion-iphone"></i>
+                        <span class="phone">{{contactManagerDetails.visitor.phone_number | tel}}</span>
+                    </div>
+                    <div>
+                        <i class="ion-email"></i>
+                        <span class="email">{{contactManagerDetails.visitor.email || '-'}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-xs-12 no-padding">
+                <div class="contact-info position-address">
+                    <div>
+                        <span
+                            class="position">{{showOrganizationTypeOption(contactManagerDetails.visitor) || '-'}}</span>
+                    </div>
+                    <div>
+                        <i class="ion-location"></i>
+                        <span class="address">{{contactManagerDetails.fullAddress || '-'}}</span>
+                    </div>
+                    <!--<div>
+            <i class="ion-location"></i>
+            <span class="address">{{contactManagerDetails.visitor.address}}</span>
+          </div>-->
+                </div>
+            </div>
+        </div>
+
+        <div class="message-details">
+            <span class="subject">Tour Information</span>
+        </div>
+        <div class="line"></div>
+        <div class="message-body">
+            <div class="col-md-12">
+                <div class="col-lg-6 col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">General Information</div>
+                        <div class="panel-body">
+                            <div class="form-group col-md-12">
+                                <label class="col-sm-3 control-label">Name: </label>
+                                <div class="col-sm-9">{{formscope.name || '-'}}</div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="col-sm-3 control-label">Organization: </label>
+                                <div class="col-sm-9">{{formscope.organization || '-'}}</div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="col-sm-3 control-label">Tour Date: </label>
+                                <div class="col-sm-9">{{formscope.start_date | amDateFormat:'(dddd) DD, MMMM YYYY'}}
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="col-sm-3 control-label">Transport Type: </label>
+                                <div class="col-sm-9">{{formscope.tour_transport.name || '-'}}</div>
+                            </div>
+                            <!--<div class="form-group col-md-12">
+                                <label class="col-sm-3 control-label">Location: </label>
+                                <div class="col-sm-9">{{formscope.tour_location.name || '-'}}</div>
+                            </div>-->
+                            <div class="form-group col-md-12">
+                                <label class="col-sm-3 control-label">Person: </label>
+                                <div class="col-sm-9">
+                                    <p><span>Children:</span> {{formscope.children}}</p>
+                                    <p><span>Adults:</span> {{formscope.adults}}</p>
+                                    <p><span>Senior:</span> {{formscope.senior}}</p>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="col-sm-3 control-label">Special Request: </label>
+                                <div class="col-sm-9">{{formscope.special_request || '-'}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Tour Task</div>
+                        <div class="panel-body">
+                            <div class="form-group col-md-12">
+                                <label class="col-sm-3 control-label">Tour Type: </label>
+                                <div class="col-sm-9">{{formscope.tour_tapes.name}}</div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="col-sm-3 control-label">Task: </label>
+                                <div class="col-sm-9 pull-right" ng-repeat="task in formscope.tasks">
+                                    <p class='m-b-xs'>{{task.task}}</p>
+                                    <div class="line"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="message-details">
+            <span class="subject">Visitors Information</span>
+        </div>
+        <div class="line"></div>
+        <div class="message-body">
+            <div class="col-md-12">
+                <!--<div class="col-md-4" ng-repeat="visitor in visitors">
+                    <div class="panel panel-default bootstrap-panel ">
+                        <div class="panel-heading">
+                            {{visitor.name}} ({{visitor.gender_txt}})
+                        </div>
+                        <div class="panel-body">
+                            <p><label>Email:</label> {{visitor.email}}</p>
+                            <p><label>Contact Number:</label> {{visitor.phone_number}}, {{visitor.mobile}} </p>
+                            <p><label>Organization Type:</label> {{visitor.organization_txt}}</p>
+                            <p><label>Visitor Type:</label> {{visitor.visitor_txt}}</p>
+                            <p><label>Address:</label> {{visitor.address}}</p>
+                        </div>
+                    </div>
+                  </div>-->
+                <div ba-panel ba-panel-title="Visitors" ba-panel-class="with-scroll" ng-if="visitors.length">
+                    <div class="horizontal-scroll">
+                        <table datatable="ng" dt-instance="visitorInstance" dt-options="visitorOptions"
+                            dt-column-defs="visitorColumnDefs" class="row-border hover">
+                            <thead>
+                                <tr class="sortable ">
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Mobile</th>
+                                    <th>Organization type</th>
+                                    <th>Type</th>
+                                    <th>Organization</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="visitor in visitors">
+                                    <td>{{visitor.name}}</td>
+                                    <td><a class="email-link" ng-href="mailto:{{visitor.email}}">{{visitor.email}}</a>
+                                    </td>
+                                    <td>{{visitor.mobile}}</td>
+                                    <td>{{showOrganizationTypeOption(visitor)}}</td>
+                                    <td>{{showVisitorOption(visitor)}}</td>
+                                    <td>{{visitor.organization}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!--<table class="table table-striped" st-table="visitors" ng-if="visitors.length && showTable === true">
+                            <thead>
+                                <tr class="sortable ">
+                                    <th class="table-id" st-sort="id" st-sort-default="true">#</th>
+                                    <th st-sort="name">Name</th>
+                                    <th st-sort="email">email</th>
+                                    <th st-sort="mobile">Mobile</th>
+                                    <th st-sort="organization_txt">Organization type</th>
+                                    <th st-sort="visitor_txt">Type</th>
+                                    <th st-sort="organization">Organization</th>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th><input st-search="name" placeholder="Search name" class="input-sm form-control search-input" type="search" /></th>
+                                    <th><input st-search="email" placeholder="Search email" class="input-sm form-control search-input" type="search" /></th>
+                                    <th><input st-search="mobile" placeholder="Search mobile" class="input-sm form-control search-input" type="search" /></th>
+                                    <th><input st-search="organization_txt" placeholder="Search organization" class="input-sm form-control search-input" type="search" /></th>
+                                    <th><input st-search="visitor_txt" placeholder="Search type" class="input-sm form-control search-input" type="search" /></th>
+                                    <th><input st-search="organization" placeholder="Search organization" class="input-sm form-control search-input" type="search" /></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="visitor in visitors">
+                                    <td class="table-id">{{$index}}</td>
+                                    <td>{{visitor.name}}</td>
+                                    <td><a class="email-link" ng-href="mailto:{{visitor.email}}">{{visitor.email}}</a></td>
+                                    <td>{{visitor.mobile}}</td>
+                                    <td>{{visitor.organization_txt}}</td>
+                                    <td>{{visitor.visitor_txt}}</td>
+                                    <td>{{visitor.organization}}</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="6" class="text-center">
+                                        <div st-pagination="" st-items-by-page="smartTablePageSize" st-displayed-pages="5"></div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div ng-if="formscope.meals" class="message-details">
+            <span class="subject">Meals Information</span>
+        </div>
+        <div ng-if="formscope.meals" class="line"></div>
+        <div class="message-body">
+            <div class="col-md-12">
+                <div ng-if="formscope.meals">
+                    <div class="col-md-4" ng-repeat="meal in mealsType">
+                        <div class="panel panel-default bootstrap-panel xsmall-panel">
+                            <div class="panel-heading">
+                                {{showMealsTypeOption(meal)}}
+                            </div>
+                            <div class="panel-body">
+                                <p><label>Specific item:</label> {{meal.specific_item}}</p>
+                                <p><label>Catering manager:</label> {{showCateringManager(meal)}}</p>
+                                <p><label>People:</label> {{meal.people}}</p>
+                                <p><label>Meal Service:</label> {{showMealServiceTypeOption(meal)}}</p>
+                                <p><label>Meal Location:</label> {{showMealServiceLocationsOption(meal)}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="message-details" ng-if="formscope.status == 0">
+            <span class="subject">Action</span>
+        </div>
+        <div class="line" ng-if="formscope.status == 0"></div>
+        <div class="message-body" ng-if="formscope.status == 0">
+            <div class="col-md-12">
+                <div class="form-group col-md-6">
+                    <label>Comment</label>
+                    <textarea placeholder="Please enter comment" class="form-control" ng-model="formscope.comment"
+                        name="request" chars="text"></textarea>
+                </div>
+                <div class="form-group col-md-12">
+                    <a type="submit" ng-disabled="isSubmitted" ng-click="approveRejectTour(1)" class="btn btn-success"
+                        align="center">Acknowledge</a>
+                    <a type="submit" ng-disabled="isSubmitted" ng-click="approveRejectTour(3)" class="btn btn-danger"
+                        align="center">Reject</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="thank-you-container" ng-if="isSubmitted == 1">
+        <div class="thank-you-text">
+            Thank You
+        </div>
+    </div>
+</div>

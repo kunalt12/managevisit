@@ -1,0 +1,244 @@
+<div class="widgets">
+   <div class="row">
+      <div class="col-md-12">
+         <div ba-panel="" ba-panel-title="{{pageName}}" ba-panel-class="with-scroll">
+            <div class="ng-cloak form-group col-md-12">
+               <form class="form-validation" editable-form="" role="form" name="add_form">
+                  <div class="row">
+                     <h3 class="with-line">Tour Information</h3>
+                     <div class="form-group col-lg-4 col-md-12 col-sm-12"><label>Tour Name<code>*</code></label> <input type="text" focus-me="" class="form-control" ng-model="formscope.name" placeholder="Please enter name" name="tour_name" required-error-message="{{errorMessage.name.required}}" minlength-error-message="{{errorMessage.name.minlength}}" maxlength-error-message="{{errorMessage.name.maxlength}}" validator="required, minlength=2, maxlength=50" valid-method="blur" chars="company-name"></div>
+                     <div class="form-group col-lg-4 col-md-12 col-sm-12">
+                        <label for="input01">Tour Date<code>*</code></label>
+                        <div class="" moment-picker="formscope.start_date" max-view="hour" start-view="month" format="YYYY-MM-DD HH:mm"><input class="form-control" readonly="" name="start_date" required-error-message="{{errorMessage.start_date.required}}" validator="required" valid-method="blur" placeholder="Please select the tour date" ng-model="formscope.start_date" ng-model-options="{ updateOn: 'blur' }"></div>
+                     </div>
+                     <div class="form-group col-lg-4 col-md-12 col-sm-12"><label>Transport Type</label><select chosen="" ng-model="formscope.transport_id" name="transport_id" ng-options="type.id as type.name for type in TransportOption" class="form-control"  valid-method="watch, blur" validation-group="transport_id_error_message"></select></div>
+                  </div>
+                  <div class="row">
+                     <div class="form-group col-lg-4 col-md-12 col-sm-12"><label for="input01">No. of Adults<code ng-if="!formscope.senior || formscope.senior < 1">*</code></label> <input type="text" class="form-control" ng-model="formscope.adults" placeholder="Please enter adults count" name="adults" required-error-message="{{errorMessage.adults.required}}" maxlength-error-message="{{errorMessage.adults.maxlength}}" validator="maxlength=5" valid-method="blur" chars="numbers"></div>
+                     <div class="form-group col-lg-4 col-md-12 col-sm-12"><label for="input01">No. of Senior(Above 65+)<code ng-if="!formscope.adults || formscope.adults < 1">*</code></label> <input type="text" class="form-control" ng-model="formscope.senior" placeholder="Please enter senior count" name="senior" required-error-message="{{errorMessage.senior.required}}" maxlength-error-message="{{errorMessage.senior.maxlength}}" validator="maxlength=5" valid-method="blur" chars="numbers"></div>
+                     <div class="form-group col-lg-4 col-md-12 col-sm-12"><label for="input01">No. of Children (Below 18)</label> <input type="text" class="form-control" ng-model="formscope.children" placeholder="Please enter children count" name="children" chars="numbers"></div>
+                  </div>
+                  <div class="row">
+                     <div class="form-group col-lg-4 col-md-12 col-sm-12">
+                        <label>Organization<code>*</code></label>
+                        <angucomplete-alt id="mainOrganization" placeholder="Please enter organization name" pause="100" initial-value="formscope.organization" selected-object="residentSelected" local-data="organizationOption" search-fields="organization" title-field="organization" minlength="1" input-class="form-control" match-class="highlight" field-required="true" auto-match="true" override-suggestions="true" ng-model="formscope.organization" name="organization" required-error-message="{{errorMessage.organization.required}}" minlength-error-message="{{errorMessage.organization.minlength}}" maxlength-error-message="{{errorMessage.organization.maxlength}}" validator="required, minlength=2, maxlength=50" valid-method="watch, blur" chars="text"></angucomplete-alt>
+                     </div>
+                     <div class="form-group col-lg-4 col-md-12 col-sm-12"><label>Special Request</label> <textarea placeholder="Please enter special request" class="form-control" ng-model="formscope.special_request" name="special_request"></textarea></div>
+                  </div>
+                  <div class="row" ng-if="state.current.name == 'tours.edit'" ng-show="edittourtype">
+                     <h3 class="with-line">Tour type</h3>
+                     <div class="form-group col-lg-4 col-md-12 col-sm-12"><label>Tour Type<code>*</code></label><select chosen="" ng-model="formscope.tourtype_id" name="tourtype_id" ng-options="type.id as type.name for type in TourTypeOption" class="form-control" required-error-message="{{errorMessage.tourtype_id.required}}" validator="required" valid-method="watch, blur" validation-group="tourtype_id_error_message"></select><span id="tourtype_id_error_message"></span></div>
+                  </div>
+                  <div class="row" ng-if="state.current.name == 'tours.add'">
+                     <h3 class="with-line">Tour type and task Information <a type="submit" ng-if="addTaskBtn" ng-click="showModal()" class="pull-right btn btn-success" align="Add Task">Add Task</a></h3>
+                     <div class="form-group col-lg-4 col-md-12 col-sm-12"><label>Tour Type<code>*</code></label><select chosen="" ng-model="formscope.tourtype_id" name="tourtype_id" ng-options="type.id as type.name for type in TourTypeOption" class="form-control" required-error-message="{{errorMessage.tourtype_id.required}}" validator="required" valid-method="watch, blur" validation-group="tourtype_id_error_message"></select><span id="tourtype_id_error_message"></span></div>
+                     <div class="form-group col-md-12 col-sm-12">
+                        <label class="col-md-12 col-sm-12" ng-if="addTaskBtn">Task List</label>
+                        <div class="social-profiles row clearfix">
+                           <div class="col-lg-4 col-md-12 col-sm-12" ng-repeat="item in activeTaskList">
+                              <a class="sn-link connected" href="">
+                                 <span>
+                                    <div class="task-tag">{{ item.task }}</div>
+                                 </span>
+                                 <em class="ion-ios-close-empty sn-link-close" ng-mousedown="unconnect($index)"></em>
+                              </a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <h3 class="with-line"><a type="submit" ng-if="havePermission('visitor_in_tour','create')" ng-click="addVisitor()" class="pull-right btn btn-success" align="Add Visitor">Add</a> Visitors Information</h3>
+                     <div ba-panel="" ba-panel-title="Visitors" ba-panel-class="with-scroll" ng-if="visitors.length">
+                        <div class="horizontal-scroll">
+                           <table datatable="ng" dt-instance="visitorInstance" dt-options="visitorOptions" dt-column-defs="visitorColumnDefs" class="row-border hover">
+                              <thead>
+                                 <tr class="sortable">
+                                    <th>No</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Mobile</th>
+                                    <th>Organization type</th>
+                                    <th>Type</th>
+                                    <th>Contact manager</th>
+                                    <th style="width: 13%;">Action</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <tr ng-repeat="visitor in visitors">
+                                    <td class="table-id">{{$index + 1}}</td>
+                                    <td>{{visitor.name}}</td>
+                                    <td><a class="email-link" ng-href="mailto:{{visitor.email}}">{{visitor.email}}</a></td>
+                                    <td>{{visitor.mobile}}</td>
+                                    <td>{{showOrganizationTypeOption(visitor)}}</td>
+                                    <td>{{showVisitorOption(visitor)}}</td>
+                                    <td><input ng-model="formscope.contact_manager" name="contact_manager" id="inlineRadio1" value="{{visitor.email}}" type="radio"></td>
+                                    <td><a ng-if="havePermission('visitor_in_tour','update')" ng-click="editVisitor(visitor, $index)" class="btn btn-info btn-sm" align="center">Edit</a> <a ng-if="havePermission('visitor_in_tour','delete')" ng-confirm-click="Are you sure to delete this visitor?" confirmed-click="removeVisitor(visitor)" class="btn btn-danger btn-sm" align="center" ng-hide="visitor.email == formscope.contact_manager">Delete</a></td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <h3 class="with-line">
+                        <a type="submit" ng-click="addReferences()" class="pull-right btn btn-success" align="Add Reference">Add</a> References Information
+                     </h3>
+                     <div ba-panel="" ba-panel-title="References" ba-panel-class="with-scroll" ng-if="references.length">
+                        <div class="horizontal-scroll">
+                           <table datatable="ng" dt-instance="referenceInstance" dt-options="referenceOptions" dt-column-defs="referenceColumnDefs" class="row-border hover">
+                              <thead>
+                                 <tr class="sortable">
+                                    <th>No</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Mobile</th>
+                                    <th>Comments</th>
+                                    <th style="width: 13%;">Action</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <tr ng-repeat="reference in references">
+                                    <td class="table-id">{{$index + 1}}</td>
+                                    <td>{{reference.name}}</td>
+                                    <td>
+                                       <a class="email-link" ng-href="mailto:{{reference.email}}">{{reference.email}}</a>
+                                    </td>
+                                    <td>{{reference.mobile}}</td>
+                                    <td>{{reference.comment}}</td>
+                                    <td>
+                                       <a ng-click="editReference(reference, $index)" class="btn btn-info btn-sm" align="center">Edit</a>
+                                       <a ng-confirm-click="Are you sure to delete this reference?" confirmed-click="removeReference(reference)" class="btn btn-danger btn-sm" align="center">Delete</a>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <h3 class="with-line">
+                        <a type="submit" ng-click="addMeetings()" class="pull-right btn btn-success" align="Add Meeting">Add</a> Meetings Information
+                     </h3>
+                     <div ba-panel="" ba-panel-title="Meetings" ba-panel-class="with-scroll" ng-if="meetings.length">
+                        <div class="horizontal-scroll">
+                           <table datatable="ng" dt-instance="meetingInstance" dt-options="meetingOptions" dt-column-defs="meetingColumnDefs" class="row-border hover">
+                              <thead>
+                                 <tr class="sortable">
+                                    <th>No</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Mobile</th>
+                                    <th>Meeting</th>
+                                    <th>Comments</th>
+                                    <th style="width: 13%;">Action</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <tr ng-repeat="meeting in meetings">
+                                    <td class="table-id">{{$index + 1}}</td>
+                                    <td>{{meeting.name}}</td>
+                                    <td>
+                                       <a class="email-link" ng-href="mailto:{{meeting.email}}">{{meeting.email}}</a>
+                                    </td>
+                                    <td>{{meeting.mobile}}</td>
+                                    <td>{{meeting.meetingtime_hour + " : " + meeting.meetingtime_min + " " + meeting.meetingtime_format}}</td>
+                                    <td>{{meeting.comment}}</td>
+                                    <td>
+                                       <a ng-click="editMeetings(meeting, $index)" class="btn btn-info btn-sm" align="center">Edit</a>
+                                       <a ng-confirm-click="Are you sure to delete this meeting?" confirmed-click="removeMeetings(meeting)" class="btn btn-danger btn-sm" align="center">Delete</a>
+                                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <h3 class="with-line">Meals Service <a type="submit" ng-click="addMeals()" class="pull-right btn btn-success" align="Add Meal">Add</a></h3>
+                     <div ng-if="formscope.meals">
+                        <div class="col-lg-4 col-md-12 col-sm-12" ng-repeat="meal in mealsType">
+                           <div class="panel panel-default bootstrap-panel xsmall-panel">
+                              <div class="panel-heading">{{meal.meal_txt}} 
+                                 <a href="" class="pull-right ng-scope" ng-confirm-click="Are you sure to delete this meal?" confirmed--click="removeMeal($index)"><i class="ion-close-round"></i></a> 
+                                 <a ng-if="state.current.name == 'tours.add'" href="" class="pull-right" ng-click="editMeals(meal, $index)" style="padding-right: 10px;"><i class="ion-edit"></i></a></div>
+                              <div class="panel-body">
+                                 <p><label>Specific item:</label> {{meal.specific_item}}</p>
+                                 <p><span><label>Catering manager:</label> {{meal.catering_manager_txt}}</span></p>
+                                 <p><span><label>People:</label> {{meal.people}}</span></p>
+                                 <p><label>Meal Service:</label> {{meal.mealservice_txt}}</p>
+                                 <p><label>Meal Location:</label> {{meal.meallocation_txt}}</p>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <h3 class="with-line">General Information</h3>
+                     <div class="form-group col-lg-4 col-md-12 col-sm-12"><label>Tour Manager<code>*</code></label><select chosen="" ng-model="formscope.manager" name="manager" ng-options="type.id as type.name disable when type.isDisabled for type in managersOption" class="form-control" required-error-message="{{errorMessage.manager.required}}" validator="required" valid-method="watch, blur" validation-group="manager_error_message"></select><span id="manager_error_message"></span></div>
+                     <div class="form-group col-lg-4 col-md-12 col-sm-12" ng-if="state.current.name == 'tours.edit'"><label>Status<code>*</code></label><select chosen="" ng-change="changeStatus(formscope.status);" ng-model="formscope.status" name="status" ng-options="type.value as type.label disable when type.isDisabled for type in tourStatusOption" class="form-control"></select></div>
+                     <div class="form-group col-lg-4 col-md-12 col-sm-12" ng-if="state.current.name == 'tours.add'"><label>Preferred Language<code>*</code></label><select chosen="" ng-change="changePreferredLanguage(formscope.language);" ng-model="formscope.language" name="language" ng-options="type.value as type.label disable when type.isDisabled for type in tourLanguageOption" class="form-control"></select></div>
+                     <div class="form-group col-lg-4 col-md-12 col-sm-12" ng-if="state.current.name == 'tours.edit'"><label>Preferred Language<code>*</code></label><select chosen="" ng-change="changePreferredLanguage(formscope.language);" ng-model="formscope.language" name="language" ng-options="type.value as type.label disable when type.isDisabled for type in tourLanguageOption" class="form-control"></select></div>
+                     <div class="form-group col-lg-2 col-md-12 col-sm-12">
+                        <label>Momento</label><select chosen="" ng-model="formscope.momento_type" name="momento_type" ng-options="type.id as type.name disable when type.isDisabled for type in tourMomentoOptions" class="form-control"></select>
+                     </div>
+                     <div ng-if="formscope.momento_type" class="form-group col-lg-2 col-md-3 col-sm-3">
+                        <label>No. of Momentos</label><input type="number" ng-model="formscope.momento_quantity" name="momento_quantity" class="form-control">
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="form-group col-xs-12 col-lg-6 col-md-12 col-sm-12">
+                        <h3 class="with-line"><a type="submit" ng-if="havePermission('document_in_tour','update')" ng-click="addDocument()" class="pull-right btn btn-success" align="Add Document">Add</a>Documents Information</h3>
+                        <div class="horizontal-scroll form-group">
+                           <table datatable="ng" dt-instance="documentInstance" dt-options="documentOptions" dt-column-defs="dtColumnDefs" class="row-border hover">
+                              <thead>
+                                 <tr>
+                                    <th>No</th>
+                                    <th>Title</th>
+                                    <th>Link</th>
+                                    <th>User</th>
+                                    <th>Action</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <tr ng-repeat="doc in docList">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{doc.title}}</td>
+                                    <td><a target="_blank" href="{{doc.link}}">View</a></td>
+                                    <td>{{doc.name}}</td>
+                                    <td><a ng-if="havePermission('document_in_tour','update') && loginID == doc.created_by" ng-click="editDocument(doc, $index);"><i class="fa fa-edit"></i></a> <a ng-if="havePermission('document_in_tour','delete') && loginID == doc.created_by" ng-confirm-click="Are you sure to delete this document?" confirmed--click="removeDoc($index)"><i class="fa fa-trash-o"></i></a></td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                     <div class="form-group col-xs-12 col-lg-6 col-md-12 col-sm-12">
+                        <h3 class="with-line"><a type="submit" ng-if="havePermission('note_in_tour','update')" ng-click="addNote()" class="pull-right btn btn-success" align="Add Note">Add</a> Notes</h3>
+                        <div class="horizontal-scroll">
+                           <table datatable="ng" dt-instance="notesInstance" dt-options="notesOptions" dt-column-defs="notesColumnDefs" class="row-border hover">
+                              <thead>
+                                 <tr>
+                                    <th>No</th>
+                                    <th>Note</th>
+                                    <th>User</th>
+                                    <th>Action</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <tr ng-repeat="note in notes">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{note.note}}</td>
+                                    <td>{{note.name}}</td>
+                                    <td><a ng-if="havePermission('note_in_tour','update') && loginID == note.created_by" ng-click="editNote(note, $index);"><i class="fa fa-edit"></i></a> <a ng-if="havePermission('note_in_tour','delete') && loginID == note.created_by" ng-confirm-click="Are you sure to delete this note?" confirmed--click="removeNotes($index)"><i class="fa fa-trash-o"></i></a></td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row"><button ng-if="state.current.name == 'tours.add'" ng-click="mailModal(add_form)" ng-disabled="isSubmitted" class="btn btn-success" align="center"><i class="fa fa-spinner fa-spin" aria-hidden="true" ng-show="loginProgress"></i> {{btnName}}</button> <button ng-if="state.current.name == 'tours.edit'" ng-click="add_data(add_form)" ng-disabled="isSubmitted" class="btn btn-success" align="center"><i class="fa fa-spinner fa-spin" aria-hidden="true" ng-show="loginProgress"></i> {{btnName}}</button> <a type="submit" ui-sref="tours.list" class="btn btn-info" align="center">Cancel</a></div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

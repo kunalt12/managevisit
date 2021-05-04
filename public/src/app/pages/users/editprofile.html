@@ -1,0 +1,356 @@
+<div ba-panel="" ba-panel-class="profile-page">
+   <div class="panel-content">
+      <form class="form-validation" ng-submit="add_data(add_form)" role="form" name="add_form">
+         <h3 class="with-line">General Information</h3>
+         <div class="row">
+            <div class="col-md-6">
+               <div class="form-group row clearfix">
+                  <label for="inputFirstName" class="col-sm-3 control-label">Picture</label>
+                  <div class="col-sm-9">
+                     <div class="userpic">
+                        <div class="userpic-wrapper"><img ng-src="{{ imageUrl}}" ng-click="uploadPicture()"></div>
+                        <input type="file" id="uploadFile" ng-show="false" ng-model="formscope.profile_pic" ngf-accept="'image/*'" name="profile_pic" ngf-select="" ngf-max-size="2MB" ngf-validate="{size: {min: 1, max: '2MB'}, pattern: 'image/*'}">
+                     </div>
+                     <label class="control-label has-error ng-scope colorred" ng-if="add_form.profile_pic.$error.required && add_form.profile_pic.$error.pattern != true && (add_form.profile_pic.$touched || Submitted)">{{errorMessage.image.required}}</label> <label class="control-label has-error ng-scope colorred" ng-if="add_form.profile_pic.$error.pattern">{{errorMessage.image.pdfFile}}</label> <label class="control-label has-error ng-scope colorred" ng-if="add_form.profile_pic.$error.maxSize">{{errorMessage.image.maxSize}}</label>
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-6"></div>
+         </div>
+         <div class="row">
+            <div class="col-md-6">
+               <div class="form-group row clearfix">
+                  <label for="inputFirstName" class="col-sm-3 control-label">First Name<code>*</code></label>
+                  <div class="col-sm-9"><input type="text" class="form-control" ng-model="formscope.first_name" placeholder="Please enter first name" name="first_name" chars="letters" required-error-message="{{errorMessage.first_name.required}}" minlength-error-message="{{errorMessage.first_name.minlength}}" maxlength-error-message="{{errorMessage.first_name.maxlength}}" validator="required, minlength=2, maxlength=100" valid-method="blur"></div>
+               </div>
+               <div class="form-group row clearfix">
+                  <label for="inputFirstName" class="col-sm-3 control-label">Middle Name</label>
+                  <div class="col-sm-9"><input type="text" class="form-control" ng-model="formscope.middle_name" placeholder="Please enter middle name" name="middle_name" chars="letters"></div>
+               </div>
+               <div class="form-group row clearfix">
+                  <label for="inputLastName" class="col-sm-3 control-label">Last Name<code>*</code></label>
+                  <div class="col-sm-9"><input type="text" class="form-control" ng-model="formscope.last_name" placeholder="Please enter Last name" name="last_name" chars="letters" required-error-message="{{errorMessage.last_name.required}}" minlength-error-message="{{errorMessage.last_name.minlength}}" maxlength-error-message="{{errorMessage.last_name.maxlength}}" validator="required, minlength=2, maxlength=100" valid-method="blur"></div>
+               </div>
+            </div>
+            <div class="col-md-6">
+               <div class="form-group row clearfix">
+                  <label class="col-sm-3 control-label">Gender<code>*</code></label>
+                  <div class="col-sm-9"><select chosen="" ng-model="formscope.gender" name="gender" ng-options="company.value as company.label for company in genderOption" class="form-control" required-error-message="{{errorMessage.gender.required}}" validator="required" valid-method="blur" validation-group="gender_error_message"></select><span id="gender_error_message"></span></div>
+               </div>
+               <div class="form-group row clearfix">
+                  <label for="inputOccupation" class="col-sm-3 control-label">Date of Birth (YYYY-MM-DD)<code>*</code></label>
+                  <div class="col-sm-9"><input my-date="" type="text" class="form-control" ng-model="formscope.dob" placeholder="Please select the birth date" name="dob" required-error-message="{{errorMessage.dob.required}}" validator="required" valid-method="blur"></div>
+               </div>
+            </div>
+         </div>
+         <h3 class="with-line">Contact Information</h3>
+         <div class="row">
+            <div class="col-md-6">
+               <div class="form-group row clearfix">
+                  <label for="inputRoom" class="col-sm-3 control-label">Mobile<code>*</code></label>
+                  <div class="col-sm-9"><input type="text" class="form-control" ng-model="formscope.mobile" placeholder="Please enter your mobile number" phone-input="" name="mobile" required-error-message="{{errorMessage.mobile.required}}" minlength-error-message="{{errorMessage.mobile.minlength}}" maxlength-error-message="{{errorMessage.mobile.maxlength}}" validator="required, minlength=2, maxlength=20" valid-method="blur"></div>
+               </div>
+               <div class="form-group row clearfix">
+                  <label for="inputEmail3" class="col-sm-3 control-label">Email</label>
+                  <div class="col-sm-9"><span>{{formscope.email}}</span></div>
+               </div>
+            </div>
+            <div class="col-md-6">
+               <div class="form-group row clearfix">
+                  <label for="inputPhone" class="col-sm-3 control-label">Phone Number</label>
+                  <div class="col-sm-9"><input type="text" class="form-control" ng-model="formscope.phone_number" placeholder="Please enter your phone number" phone-input="" name="phone_number"></div>
+               </div>
+            </div>
+         </div>
+         <h3 class="with-line">Address Information</h3>
+         <div class="row">
+            <div class="col-md-6">
+               <div class="form-group row clearfix">
+                  <label for="inputEmail3" class="col-sm-3 control-label">Street 1<code>*</code></label>
+                  <div class="col-sm-9"><input type="text" class="form-control" ng-model="formscope.address" placeholder="Please enter Street 1" name="address" chars="text" required-error-message="{{errorMessage.address.required}}" minlength-error-message="{{errorMessage.address.minlength}}" maxlength-error-message="{{errorMessage.address.maxlength}}" validator="required, minlength=2, maxlength=200" valid-method="blur"></div>
+               </div>
+               <div class="form-group row clearfix">
+                  <label for="inputEmail3" class="col-sm-3 control-label">Street 2</label>
+                  <div class="col-sm-9"><input type="text" class="form-control" ng-model="formscope.address1" placeholder="Please enter Street 2" name="address1" chars="text"></div>
+               </div>
+               <div class="form-group row clearfix">
+                  <label for="inputPhone" class="col-sm-3 control-label">Country<code>*</code></label>
+                  <div class="col-sm-9"><select chosen="" ng-model="formscope.country_id" name="country_id" ng-options="country.id as country.country_name for country in countries" class="form-control" required-error-message="{{errorMessage.country_id.required}}" validator="required" valid-method="blur" validation-group="country_error_message"></select><span id="country_error_message"></span></div>
+               </div>
+            </div>
+            <div class="col-md-6">
+               <div class="form-group row clearfix">
+                  <label for="inputPhone" class="col-sm-3 control-label">State<code>*</code></label>
+                  <div class="col-sm-9"><input type="text" class="form-control" ng-model="formscope.state" placeholder="Please enter state name" name="state" chars="text" required-error-message="{{errorMessage.state.required}}" minlength-error-message="{{errorMessage.state.minlength}}" maxlength-error-message="{{errorMessage.state.maxlength}}" validator="required, minlength=2, maxlength=100" valid-method="blur"></div>
+               </div>
+               <div class="form-group row clearfix">
+                  <label for="inputPhone" class="col-sm-3 control-label">City<code>*</code></label>
+                  <div class="col-sm-9"><input type="text" class="form-control" ng-model="formscope.city" placeholder="Please enter city name" name="city" chars="text" required-error-message="{{errorMessage.city.required}}" minlength-error-message="{{errorMessage.city.minlength}}" maxlength-error-message="{{errorMessage.city.maxlength}}" validator="required, minlength=2, maxlength=100" valid-method="blur"></div>
+               </div>
+               <div class="form-group row clearfix">
+                  <label for="inputPhone" class="col-sm-3 control-label">Zip Code<code>*</code></label>
+                  <div class="col-sm-9"><input type="text" placeholder="Please enter zip code" class="form-control" name="zip_code" ng-model="formscope.zip_code" chars="numbers" required-error-message="{{errorMessage.zip_code.required}}" minlength-error-message="{{errorMessage.zip_code.minlength}}" maxlength-error-message="{{errorMessage.zip_code.maxlength}}" validator="required, minlength=2, maxlength=6" valid-method="blur"></div>
+               </div>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-md-12">
+               <div class="form-group row clearfix"><button type="submit" ng-disabled="isSubmitted" class="btn btn-primary btn-with-icon save-profile" align="center">{{btnName}}</button></div>
+            </div>
+         </div>
+      </form>
+      <h3 class="with-line">Change Password</h3>
+      <form class="form-validation" ng-submit="change_password(password_form)" role="form" name="password_form">
+         <div class="row">
+            <div class="col-md-6">
+               <div class="form-group row clearfix">
+                  <label for="inputPassword" class="col-sm-4 control-label">Current Password<code>*</code></label>
+                  <div class="col-sm-8"><input type="password" placeholder="Please enter current password" class="form-control" ng-model="changepassformscope.password" name="password" required-error-message="{{errorMessage.password.required}}" minlength-error-message="{{errorMessage.password.minlength}}" maxlength-error-message="{{errorMessage.password.maxlength}}" validator="required, minlength=6, maxlength=16" valid-method="blur"></div>
+               </div>
+            </div>
+            <div class="col-md-6">
+               <div class="form-group row clearfix">
+                  <label for="inputPassword" class="col-sm-4 control-label">New Password<code>*</code></label>
+                  <div class="col-sm-8"><input type="password" placeholder="Please enter new password" class="form-control" ng-model="changepassformscope.new_password" name="new_password" required-error-message="{{errorMessage.new_password.required}}" minlength-error-message="{{errorMessage.new_password.minlength}}" maxlength-error-message="{{errorMessage.new_password.maxlength}}" validator="required, minlength=6, maxlength=16" valid-method="blur"></div>
+               </div>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-md-6">
+               <div class="form-group row clearfix">
+                  <label for="inputConfirmPassword" class="col-sm-4 control-label">Confirm Password<code>*</code></label>
+                  <div class="col-sm-8"><input type="password" class="form-control" id="inputConfirmPassword" placeholder="Please enter confirm password" ng-model="changepassformscope.confirm_password" name="confirm_password" required-error-message="{{errorMessage.confirm_password.required}}" validator="required, confirmPassword" valid-method="blur"></div>
+               </div>
+            </div>
+            <div class="col-md-12">
+               <div class="form-group row clearfix"><button type="submit" ng-disabled="isSubmitted" class="btn btn-primary btn-with-icon save-profile" align="center">Change</button></div>
+            </div>
+         </div>
+      </form>
+      '
+      <h3 class="with-line" ng-if="havePermission('availabilities','update');">Change Availability Status</h3>
+      <form ng-if="havePermission('availabilities','update');" class="form-validation" ng-submit="change_availability(availability_form)" role="form" name="availability_form">
+         <div class="row">
+            <div class="col-md-6 form-group">
+               <label>Availability<code>*</code></label>
+               <div class="input-demo radio-demo row">
+                  <div class="col-md-3"><label class="radio-inline custom-radio nowrap"><input type="radio" ng-model="formscopestatus.status" name="type" id="inlineRadio1" value="1"> <span>Unavailable</span></label></div>
+                  <div class="col-md-2"><label class="radio-inline custom-radio nowrap"><input type="radio" ng-model="formscopestatus.status" name="type" id="inlineRadio2" value="2"> <span>Available</span></label></div>
+               </div>
+            </div>
+         </div>
+         <div class="form-group row">
+            <div class="col-sm-2"><label class="text-capitalize">Monday</label>&nbsp;&nbsp;</div>
+            <div class="col-xs-4 col-sm-3">
+               <label class="checkbox-inline custom-checkbox nowrap">'
+               <input type="checkbox" name="monday_full_day" ng-model="formscopestatus.monday_full_day">
+               <span>Full Day</span>
+               </label>
+            </div>
+            <div class="col-xs-4 col-sm-3">
+               <select name="monday_sta_hour" ng-disabled="formscopestatus.monday_full_day" ng-model="formscopestatus.monday_start.hour" ng-options="hour.value as hour.label disable when hour.isDisabled for hour in time_hour">
+                  <option value="">HH</option>
+               </select>
+               <select name="monday_sta_min" ng-disabled="formscopestatus.monday_full_day" ng-model="formscopestatus.monday_start.min" ng-options="min.value as min.label disable when min.isDisabled for min in time_min">
+                  <option value="">MM</option>
+               </select>
+               <select name="monday_sta_sec" ng-disabled="formscopestatus.monday_full_day" ng-model="formscopestatus.monday_start.am_pm" ng-options="sec.value as sec.label disable when sec.isDisabled for sec in am_pm">
+               </select>
+            </div>
+            <div class="col-xs-4 col-sm-3">
+               '
+               <select name="monday_sto_hour" ng-disabled="formscopestatus.monday_full_day" ng-model="formscopestatus.monday_stop.hour" ng-options="hour.value as hour.label disable when hour.isDisabled for hour in time_hour">
+                  <option value="">HH</option>
+               </select>
+               <select name="monday_sto_min" ng-disabled="formscopestatus.monday_full_day" ng-model="formscopestatus.monday_stop.min" ng-options="min.value as min.label disable when min.isDisabled for min in time_min">
+                  <option value="">MM</option>
+               </select>
+               <select name="monday_sto_sec" ng-disabled="formscopestatus.monday_full_day" ng-model="formscopestatus.monday_stop.am_pm" ng-options="sec.value as sec.label disable when sec.isDisabled for sec in am_pm">
+               </select>
+            </div>
+         </div>
+         <div class="form-group row">
+            <div class="col-sm-2"><label class="text-capitalize">Tuesday</label>&nbsp;&nbsp;</div>
+            <div class="col-xs-4 col-sm-3">
+               <label class="checkbox-inline custom-checkbox nowrap">
+               <input type="checkbox" name="tuesday_full_day" ng-model="formscopestatus.tuesday_full_day">
+               <span>Full Day</span>
+               </label>
+            </div>
+            <div class="col-xs-4 col-sm-3">
+               <select name="tuesday_sta_hour" ng-disabled="formscopestatus.tuesday_full_day" ng-model="formscopestatus.tuesday_start.hour" ng-options="hour.value as hour.label disable when hour.isDisabled for hour in time_hour">
+                  <option value="">HH</option>
+               </select>
+               <select name="tuesday_sta_min" ng-disabled="formscopestatus.tuesday_full_day" ng-model="formscopestatus.tuesday_start.min" ng-options="min.value as min.label disable when min.isDisabled for min in time_min">
+                  <option value="">MM</option>
+               </select>
+               <select name="tuesday_sta_sec" ng-disabled="formscopestatus.tuesday_full_day" ng-model="formscopestatus.tuesday_start.am_pm" ng-options="sec.value as sec.label disable when sec.isDisabled for sec in am_pm">
+               </select>
+            </div>
+            <div class="col-xs-4 col-sm-3">
+               <select name="tuesday_sto_hour" ng-disabled="formscopestatus.tuesday_full_day" ng-model="formscopestatus.tuesday_stop.hour" ng-options="hour.value as hour.label disable when hour.isDisabled for hour in time_hour">
+                  <option value="">HH</option>
+               </select>
+               <select name="tuesday_sto_min" ng-disabled="formscopestatus.tuesday_full_day" ng-model="formscopestatus.tuesday_stop.min" ng-options="min.value as min.label disable when min.isDisabled for min in time_min">
+                  <option value="">MM</option>
+               </select>
+               <select name="tuesday_sto_sec" ng-disabled="formscopestatus.tuesday_full_day" ng-model="formscopestatus.tuesday_stop.am_pm" ng-options="sec.value as sec.label disable when sec.isDisabled for sec in am_pm">
+               </select>
+            </div>
+         </div>
+         <div class="form-group row">
+            <div class="col-sm-2"><label class="text-capitalize">Wednesday</label>&nbsp;&nbsp;</div>
+            <div class="col-xs-4 col-sm-3">
+               <label class="checkbox-inline custom-checkbox nowrap">
+               <input type="checkbox" name="wednesday_full_day" ng-model="formscopestatus.wednesday_full_day">
+               <span>Full Day</span>
+               </label>
+            </div>
+            <div class="col-xs-4 col-sm-3">
+               <select name="wednesday_sta_hour" ng-disabled="formscopestatus.wednesday_full_day" ng-model="formscopestatus.wednesday_start.hour" ng-options="hour.value as hour.label disable when hour.isDisabled for hour in time_hour">
+                  <option value="">HH</option>
+               </select>
+               <select name="wednesday_sta_min" ng-disabled="formscopestatus.wednesday_full_day" ng-model="formscopestatus.wednesday_start.min" ng-options="min.value as min.label disable when min.isDisabled for min in time_min">
+                  <option value="">MM</option>
+               </select>
+               <select name="wednesday_sta_sec" ng-disabled="formscopestatus.wednesday_full_day" ng-model="formscopestatus.wednesday_start.am_pm" ng-options="sec.value as sec.label disable when sec.isDisabled for sec in am_pm">
+               </select>
+            </div>
+            <div class="col-xs-4 col-sm-3">
+               <select name="wednesday_sto_hour" ng-disabled="formscopestatus.wednesday_full_day" ng-model="formscopestatus.wednesday_stop.hour" ng-options="hour.value as hour.label disable when hour.isDisabled for hour in time_hour">
+                  <option value="">HH</option>
+               </select>
+               <select name="wednesday_sto_min" ng-disabled="formscopestatus.wednesday_full_day" ng-model="formscopestatus.wednesday_stop.min" ng-options="min.value as min.label disable when min.isDisabled for min in time_min">
+                  <option value="">MM</option>
+               </select>
+               <select name="wednesday_sto_sec" ng-disabled="formscopestatus.wednesday_full_day" ng-model="formscopestatus.wednesday_stop.am_pm" ng-options="sec.value as sec.label disable when sec.isDisabled for sec in am_pm">
+               </select>
+            </div>
+         </div>
+         <div class="form-group row">
+            <div class="col-sm-2"><label class="text-capitalize">Thursday</label>&nbsp;&nbsp;</div>
+            <div class="col-xs-4 col-sm-3">
+               <label class="checkbox-inline custom-checkbox nowrap">
+               <input type="checkbox" name="thursday_full_day" ng-model="formscopestatus.thursday_full_day">
+               <span>Full Day</span>
+               </label>
+            </div>
+            <div class="col-xs-4 col-sm-3">
+               <select name="thursday_sta_hour" ng-disabled="formscopestatus.thursday_full_day" ng-model="formscopestatus.thursday_start.hour" ng-options="hour.value as hour.label disable when hour.isDisabled for hour in time_hour">
+                  <option value="">HH</option>
+               </select>
+               <select name="thursday_sta_min" ng-disabled="formscopestatus.thursday_full_day" ng-model="formscopestatus.thursday_start.min" ng-options="min.value as min.label disable when min.isDisabled for min in time_min">
+                  <option value="">MM</option>
+               </select>
+               <select name="thursday_sta_sec" ng-disabled="formscopestatus.thursday_full_day" ng-model="formscopestatus.thursday_start.am_pm" ng-options="sec.value as sec.label disable when sec.isDisabled for sec in am_pm">
+               </select>
+            </div>
+            <div class="col-xs-4 col-sm-3">
+               <select name="thursday_sto_hour" ng-disabled="formscopestatus.thursday_full_day" ng-model="formscopestatus.thursday_stop.hour" ng-options="hour.value as hour.label disable when hour.isDisabled for hour in time_hour">
+                  <option value="">HH</option>
+               </select>
+               <select name="thursday_sto_min" ng-disabled="formscopestatus.thursday_full_day" ng-model="formscopestatus.thursday_stop.min" ng-options="min.value as min.label disable when min.isDisabled for min in time_min">
+                  <option value="">MM</option>
+               </select>
+               <select name="thursday_sto_sec" ng-disabled="formscopestatus.thursday_full_day" ng-model="formscopestatus.thursday_stop.am_pm" ng-options="sec.value as sec.label disable when sec.isDisabled for sec in am_pm">
+               </select>
+            </div>
+         </div>
+         <div class="form-group row">
+            <div class="col-sm-2"><label class="text-capitalize">Friday</label>&nbsp;&nbsp;</div>
+            <div class="col-xs-4 col-sm-3">
+               <label class="checkbox-inline custom-checkbox nowrap">
+               <input type="checkbox" name="friday_full_day" ng-model="formscopestatus.friday_full_day">
+               <span>Full Day</span>
+               </label>
+            </div>
+            <div class="col-xs-4 col-sm-3">
+               <select name="friday_sta_hour" ng-disabled="formscopestatus.friday_full_day" ng-model="formscopestatus.friday_start.hour" ng-options="hour.value as hour.label disable when hour.isDisabled for hour in time_hour">
+                  <option value="">HH</option>
+               </select>
+               <select name="friday_sta_min" ng-disabled="formscopestatus.friday_full_day" ng-model="formscopestatus.friday_start.min" ng-options="min.value as min.label disable when min.isDisabled for min in time_min">
+                  <option value="">MM</option>
+               </select>
+               <select name="friday_sta_sec" ng-disabled="formscopestatus.friday_full_day" ng-model="formscopestatus.friday_start.am_pm" ng-options="sec.value as sec.label disable when sec.isDisabled for sec in am_pm">
+               </select>
+            </div>
+            <div class="col-xs-4 col-sm-3">
+               <select name="friday_sto_hour" ng-disabled="formscopestatus.friday_full_day" ng-model="formscopestatus.friday_stop.hour" ng-options="hour.value as hour.label disable when hour.isDisabled for hour in time_hour">
+                  <option value="">HH</option>
+               </select>
+               <select name="friday_sto_min" ng-disabled="formscopestatus.friday_full_day" ng-model="formscopestatus.friday_stop.min" ng-options="min.value as min.label disable when min.isDisabled for min in time_min">
+                  <option value="">MM</option>
+               </select>
+               <select name="friday_sto_sec" ng-disabled="formscopestatus.friday_full_day" ng-model="formscopestatus.friday_stop.am_pm" ng-options="sec.value as sec.label disable when sec.isDisabled for sec in am_pm">
+               </select>
+            </div>
+         </div>
+         <div class="form-group row">
+            <div class="col-sm-2"><label class="text-capitalize">Saturday</label>&nbsp;&nbsp;</div>
+            <div class="col-xs-4 col-sm-3">
+               <label class="checkbox-inline custom-checkbox nowrap">
+               <input type="checkbox" name="saturday_full_day" ng-model="formscopestatus.saturday_full_day">
+               <span>Full Day</span>
+               </label>
+            </div>
+            <div class="col-xs-4 col-sm-3">
+               <select name="saturday_sta_hour" ng-disabled="formscopestatus.saturday_full_day" ng-model="formscopestatus.saturday_start.hour" ng-options="hour.value as hour.label disable when hour.isDisabled for hour in time_hour">
+                  <option value="">HH</option>
+               </select>
+               <select name="saturday_sta_min" ng-disabled="formscopestatus.saturday_full_day" ng-model="formscopestatus.saturday_start.min" ng-options="min.value as min.label disable when min.isDisabled for min in time_min">
+                  <option value="">MM</option>
+               </select>
+               <select name="saturday_sta_sec" ng-disabled="formscopestatus.saturday_full_day" ng-model="formscopestatus.saturday_start.am_pm" ng-options="sec.value as sec.label disable when sec.isDisabled for sec in am_pm">
+               </select>
+            </div>
+            <div class="col-xs-4 col-sm-3">
+               <select name="saturday_sto_hour" ng-disabled="formscopestatus.saturday_full_day" ng-model="formscopestatus.saturday_stop.hour" ng-options="hour.value as hour.label disable when hour.isDisabled for hour in time_hour">
+                  <option value="">HH</option>
+               </select>
+               <select name="saturday_sto_min" ng-disabled="formscopestatus.saturday_full_day" ng-model="formscopestatus.saturday_stop.min" ng-options="min.value as min.label disable when min.isDisabled for min in time_min">
+                  <option value="">MM</option>
+               </select>
+               <select name="saturday_sto_sec" ng-disabled="formscopestatus.saturday_full_day" ng-model="formscopestatus.saturday_stop.am_pm" ng-options="sec.value as sec.label disable when sec.isDisabled for sec in am_pm">
+               </select>
+            </div>
+         </div>
+         <div class="form-group row">
+            <div class="col-sm-2"><label class="text-capitalize">Sunday</label>&nbsp;&nbsp;</div>
+            <div class="col-xs-4 col-sm-3">
+               <label class="checkbox-inline custom-checkbox nowrap">
+               <input type="checkbox" name="sunday_full_day" ng-model="formscopestatus.sunday_full_day">
+               <span>Full Day</span>
+               </label>
+            </div>
+            <div class="col-xs-4 col-sm-3">
+               <select name="sunday_sta_hour" ng-disabled="formscopestatus.sunday_full_day" ng-model="formscopestatus.sunday_start.hour" ng-options="hour.value as hour.label disable when hour.isDisabled for hour in time_hour">
+                  <option value="">HH</option>
+               </select>
+               <select name="sunday_sta_min" ng-disabled="formscopestatus.sunday_full_day" ng-model="formscopestatus.sunday_start.min" ng-options="min.value as min.label disable when min.isDisabled for min in time_min">
+                  <option value="">MM</option>
+               </select>
+               <select name="sunday_sta_sec" ng-disabled="formscopestatus.sunday_full_day" ng-model="formscopestatus.sunday_start.am_pm" ng-options="sec.value as sec.label disable when sec.isDisabled for sec in am_pm">
+               </select>
+            </div>
+            <div class="col-xs-4 col-sm-3">
+               <select name="sunday_sto_hour" ng-disabled="formscopestatus.sunday_full_day" ng-model="formscopestatus.sunday_stop.hour" ng-options="hour.value as hour.label disable when hour.isDisabled for hour in time_hour">
+                  <option value="">HH</option>
+               </select>
+               <select name="sunday_sto_min" ng-disabled="formscopestatus.sunday_full_day" ng-model="formscopestatus.sunday_stop.min" ng-options="min.value as min.label disable when min.isDisabled for min in time_min">
+                  <option value="">MM</option>
+               </select>
+               <select name="sunday_sto_sec" ng-disabled="formscopestatus.sunday_full_day" ng-model="formscopestatus.sunday_stop.am_pm" ng-options="sec.value as sec.label disable when sec.isDisabled for sec in am_pm">
+               </select>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-md-6 form-group"><label>Comment</label> <textarea class="form-control" placeholder="Please enter comment" ng-model="formscopestatus.comment" name="comment"></textarea></div>
+         </div>
+         <div class="row">
+            <div class="col-md-12">
+               <div class="form-group row clearfix"><button type="submit" ng-disabled="isSubmitted" class="btn btn-primary btn-with-icon save-profile" align="center">Change</button></div>
+            </div>
+         </div>
+      </form>
+   </div>
+</div>

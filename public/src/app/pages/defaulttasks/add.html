@@ -1,0 +1,126 @@
+<div class="widgets">
+
+  <div class="row">
+    <div class="col-md-6">
+      <div
+          ba-panel
+          ba-panel-title="Add Users"
+          ba-panel-class="with-scroll">
+        <div class="ng-cloak" ng-controller="UsersCtrl as selectpickerVm">
+          <form class="form-validation" ng-submit="add_data(add_form)" role="form" name="add_form">
+              <div class="form-group col-md-12">
+                <div class="form-group col-md-6">
+                    <label for="input01">First Name<code>*</code> </label>
+                    <input type="text" class="form-control" ng-model="formscope.first_name" placeholder="Please enter first name"
+                      name="first_name"
+                      required-error-message="{{errorMessage.first_name.required}}" 
+                      minlength-error-message="{{errorMessage.first_name.minlength}}"  
+                      maxlength-error-message="{{errorMessage.first_name.maxlength}}" 
+                      validator="required, minlength=2, maxlength=20" valid-method="blur" chars="letters">
+                </div>
+                
+                <div class="form-group col-md-6">
+                    <label for="input01">Last Name<code>*</code></label>
+                    <input type="text" class="form-control" ng-model="formscope.last_name" placeholder="Please enter Last name"
+                      name="last_name"
+                      required-error-message="{{errorMessage.last_name.required}}" 
+                      minlength-error-message="{{errorMessage.last_name.minlength}}"  
+                      maxlength-error-message="{{errorMessage.last_name.maxlength}}" 
+                      validator="required, minlength=2, maxlength=20" valid-method="blur" chars="letters">
+                </div>
+              </div>
+
+              <div class="form-group col-md-12">
+                <div class="form-group col-md-12">
+                    <label for="input01">Email<code>*</code></label>
+                    <input type="email" class="form-control" ng-model="formscope.email" placeholder="Please enter email"
+                      name="email"
+                      required-error-message="{{errorMessage.email.required}}" 
+                      email-error-message="{{errorMessage.email.invalidEmail}}" 
+                      minlength-error-message="{{errorMessage.email.minlength}}"  
+                      maxlength-error-message="{{errorMessage.email.maxlength}}" 
+                      validator="required, email, minlength=2, maxlength=100" valid-method="blur">
+                </div>
+              </div>
+              
+              <div class="form-group col-md-12">
+                <div class="form-group col-md-6">
+                    <label for="textarea01">Organization Type<code>*</code></label>
+                    <select ng-model="formscope.organization_id" name="organization_id" ng-options="company.id as company.name for company in OrganizationOption" 
+                      class="form-control"
+                      required-error-message="{{errorMessage.organization_id.required}}" 
+                      validator="required" valid-method="blur"></select>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="textarea01">Visitor Type<code>*</code></label>
+                    <select ng-model="formscope.visitor_type" name="visitor_type" ng-options="company.id as company.name for company in VisitorOption" 
+                      class="form-control"
+                      required-error-message="{{errorMessage.visitor_type.required}}" 
+                      validator="required" valid-method="blur"></select>
+                </div>
+              </div>
+
+              <div class="form-group col-md-12">
+                <div class="form-group col-md-6">
+                    <label for="input04">Phone Number<code>*</code></label>
+                    <input type="text" class="form-control" ng-model="formscope.phone_number" 
+                      placeholder="Please enter your phone number" phone-input  name="phone_number"
+                      required-error-message="{{errorMessage.phone_number.required}}" 
+                      maxlength-error-message="{{errorMessage.phone_number.maxlength}}" 
+                      minlength-error-message="{{errorMessage.phone_number.minlength}}"
+                      validator="required, maxlength=15, minlength=10" valid-method="blur" chars="numbers">
+                    <!--<span class="help-block sub-little-text">A block of help text that breaks onto a new line and may extend beyond one line.</span>-->
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="input04">Mobile<code>*</code></label>
+                    <input type="text" class="form-control" ng-model="formscope.mobile" 
+                      placeholder="Please enter your mobile number" phone-input  name="mobile"
+                      required-error-message="{{errorMessage.mobile.required}}" 
+                      maxlength-error-message="{{errorMessage.mobile.maxlength}}" 
+                      minlength-error-message="{{errorMessage.mobile.minlength}}"
+                      validator="required, maxlength=15, minlength=10" valid-method="blur" chars="numbers">
+                    <!--<span class="help-block sub-little-text">A block of help text that breaks onto a new line and may extend beyond one line.</span>-->
+                </div>
+              </div>
+
+              <div class="form-group col-md-12">
+                <div class="form-group col-md-12">
+                    <label for="textarea01">Address<code>*</code></label>
+                    <textarea placeholder="Please enter address" class="form-control" ng-model="formscope.address" name="address"
+                      required-error-message="{{errorMessage.address.required}}" 
+                      validator="required" valid-method="blur"></textarea>
+                </div>
+              </div>
+
+              <div class="form-group col-md-12">
+                <div class="form-group col-md-6">
+                    <label for="textarea01">Gender<code>*</code></label>
+                    <select ng-model="formscope.gender" name="gender" ng-options="company.value as company.label for company in genderOption" 
+                      class="form-control"
+                      required-error-message="{{errorMessage.gender.required}}" 
+                      validator="required" valid-method="blur"></select>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label>Status<code>*</code></label>
+                    <select ng-model="formscope.status" name="status" ng-options="company.value as company.text for company in statusOption" 
+                      class="form-control"
+                      required-error-message="{{errorMessage.status.required}}" 
+                      validator="required" valid-method="blur"></select>
+                </div>
+
+                
+              </div>
+
+              <div class="form-group col-md-12">
+                <button type="submit" ng-disabled="isSubmitted" class="btn btn-success" align="center">{{btnName}}</button>
+                <a type="submit" ui-sref="defaulttasks.list" class="btn btn-info" align="center">Cancel</a>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

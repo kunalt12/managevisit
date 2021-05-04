@@ -1,0 +1,175 @@
+<div class="message-container viewTourMain">
+  <div class="message">
+    <div class="row paddingright1">
+      <button ui-sref="tours.list" type="button" class="back-button btn btn-default btn-with-icon pull-right px-2"><i
+          class="ion-chevron-left"></i>Back
+      </button>
+    </div>
+    
+    <!--<div class="line"></div>-->
+    <div class="message-details">
+      <span class="subject">Tour Contact Person Information</span>
+    </div>
+    <div class="line"></div>
+
+    <div class="person-info row">      
+      <div class="col-lg-4 col-md-12 no-padding">
+        <div class="name">
+          <h2 class="name-h">{{contactManagerDetails.visitor.name}}</h2>
+          <div>
+            <span class="mail-tag tag label label-success">{{contactManagerDetails.visitor.visitor_txt}}</span>
+            <span class="mail-tag tag label label-info">{{contactManagerDetails.visitor.gender_txt}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-xs-12 no-padding">
+        <div class="contact-info phone-email">
+          <div>
+            <i class="ion-iphone"></i>
+            <span class="phone">{{contactManagerDetails.visitor.phone_number | tel}}</span>
+          </div>
+          <div>
+            <i class="ion-iphone"></i>
+            <span class="phone">{{contactManagerDetails.visitor.mobile | tel}}</span>
+          </div>
+          <div>
+            <i class="ion-email"></i>
+            <span class="email">{{contactManagerDetails.visitor.email}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-xs-12 no-padding">
+        <div class="contact-info position-address">
+          <div>
+            <span class="position">{{contactManagerDetails.visitor.organization_txt}}</span>
+          </div>
+          <div>
+            <i class="ion-location"></i>
+            <span class="address">{{contactManagerDetails.visitor.address}}</span>
+          </div>
+          <!--<div>
+            <i class="ion-location"></i>
+            <span class="address">{{contactManagerDetails.visitor.address}}</span>
+          </div>-->
+        </div>
+      </div>
+    </div>
+    
+    <div class="message-details">
+      <span class="subject">Tour Information</span>
+    </div>
+    <div class="line"></div>
+    <div class="message-body">
+      <div class="col-md-12">
+        <div class="col-lg-6 col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">General Information</div>
+            <div class="panel-body">
+              <div class="form-group col-md-12">
+                  <label class="col-sm-3 control-label">Name: </label>
+                  <div class="col-sm-9">{{formscope.name}}</div>
+              </div>
+              <div class="form-group col-md-12">
+                  <label class="col-sm-3 control-label">Organization: </label>
+                  <div class="col-sm-9">{{formscope.organization}}</div>
+              </div>
+              <div class="form-group col-md-12">
+                  <label class="col-sm-3 control-label">Arrival Date: </label>
+                  <div class="col-sm-9">{{formscope.start_date | amDateFormat:'(dddd) DD, MMMM YYYY'}}</div>
+              </div>
+              <div class="form-group col-md-12">
+                  <label class="col-sm-3 control-label">Transport Type: </label>
+                  <div class="col-sm-9">{{formscope.tour_transport.name}}</div>
+              </div>
+              <div class="form-group col-md-12">
+                  <label class="col-sm-3 control-label">Location: </label>
+                  <div class="col-sm-9">{{formscope.tour_location.name}}</div>
+              </div>
+              <div class="form-group col-md-12">
+                  <label class="col-sm-3 control-label">Person: </label>
+                  <div class="col-sm-9">
+                    <p><span>Children:</span> {{formscope.children}}</p>
+                    <p><span>Adults:</span> {{formscope.adults}}</p>
+                    <p><span>Senior:</span> {{formscope.senior}}</p>
+                  </div>
+              </div>
+              <div class="form-group col-md-12">
+                  <label class="col-sm-3 control-label">Special Request: </label>
+                  <div class="col-sm-9">{{formscope.special_request}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">Tour Task</div>
+            <div class="panel-body">
+              <div class="form-group col-md-12">
+                  <label class="col-sm-3 control-label">Tour Type: </label>
+                  <div class="col-sm-9">{{formscope.tour_tapes.name}}</div>
+              </div>
+              <div class="form-group col-md-12">
+                  <label class="col-sm-3 control-label">Task: </label>
+                  <div class="col-sm-9" ng-repeat="task in formscope.tasks">
+                    <p>{{task.task}}</p>
+                    <div class="line"></div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="message-details">
+      <span class="subject">Visitors Information</span>
+    </div>
+    <div class="line"></div>
+    <div class="message-body">
+      <div class="col-md-12">
+        <div class="col-md-4" ng-repeat="visitor in visitors">
+          <div class="panel panel-default bootstrap-panel ">
+              <div class="panel-heading">
+                  {{visitor.name}} ({{visitor.gender_txt}})
+              </div>
+              <div class="panel-body">
+                  <p><label>Email:</label> {{visitor.email}}</p>
+                  <p><label>Contact Number:</label> {{visitor.phone_number}}, {{visitor.mobile}} </p>
+                  <p><label>Organization Type:</label> {{visitor.organization_txt}}</p>
+                  <p><label>Visitor Type:</label> {{visitor.visitor_txt}}</p>
+                  <p><label>Address:</label> {{visitor.address}}</p>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="message-details">
+      <span class="subject">Meals Information</span>
+    </div>
+    <div class="line"></div>
+    <div class="message-body">
+      <div class="col-md-12">
+        <div ng-if="formscope.meals">
+              <div class="col-md-4" ng-repeat="meal in mealsType">
+                  <div class="panel panel-default bootstrap-panel xsmall-panel">
+                      <div class="panel-heading">
+                          {{meal.meal_txt}}
+                      </div>
+                      <div class="panel-body">
+                          <p><label>Specific item:</label> {{meal.specific_item}}</p>
+                          <p>
+                              <span><label>Catering manager:</label> {{meal.catering_manager_txt}}</span>
+                              <span class="pull-right"><label>People:</label> {{meal.people}}</span>
+                          </p>
+                          <p><label>Meal Service:</label> {{meal.mealservice_txt}}</p>
+                          <p><label>Meal Location:</label> {{meal.meallocation_txt}}</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--acknowledge-->

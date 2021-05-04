@@ -1,0 +1,49 @@
+<div class="row">
+            <div class="col-md-6">
+                <div ba-panel="" ba-panel-title="{{pageName}}" ba-panel-class="with-scroll">
+                    <form ng-submit="add_data(add_form)" role="form" name="add_form">
+                        <div class="form-group">
+                            <label>Company Name
+                                <code>*</code>
+                            </label>
+                            <input type="text" ng-model="formscope.name" name="name" class="form-control" placeholder="Please enter company name" required-error-message="{{errorMessage.name.required}}" focus-me="" minlength-error-message="{{errorMessage.name.minlength}}" maxlength-error-message="{{errorMessage.name.maxlength}}" validator="required, minlength=2, maxlength=50" chars="slug" maxlength="50">
+                        </div>
+                        <div class="form-group">
+                            <label>API Key
+                                <code>*</code>
+                            </label>
+                            <div class="input-group">
+                                <input type="text" ng-model="formscope.api_key" name="api_key" class="form-control" placeholder="Please enter api key" required-error-message="{{errorMessage.api_key.required}}" minlength-error-message="{{errorMessage.api_key.minlength}}" maxlength-error-message="{{errorMessage.api_key.maxlength}}" readonly="" validator="required, minlength=16, maxlength=16" valid-method="blur">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" ng-click="changeKey()" type="button">Reset</button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>IP Address
+                                <code>*</code>
+                            </label>
+                            <input type="text" ng-model="formscope.ipaddress" name="ipaddress" class="form-control" placeholder="Please enter ip address" required-error-message="{{errorMessage.ipaddress.required}}" validator="required, ipaddress">
+                        </div>
+                        <div class="form-group" ng-if="state.current.name == 'ApiManagements.edit'">
+                            <label>Slug</label>
+                            <div class="input-group">
+                                <span>{{formscope.slug}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Tour Manager</label>
+                            <select chosen="" ng-model="formscope.tour_manager" name="tour_manager" ng-options="type.id as type.name disable when type.isDisabled for type in managerOptions" class="form-control">
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select chosen="" ng-model="formscope.status" name="status" ng-options="company.value as company.text for company in statusOption" class="form-control">
+                            </select>
+                        </div>
+                        <button type="submit" ng-disabled="isSubmitted" class="btn btn-success" align="center">{{btnName}}</button>
+                        <a type="submit" ui-sref="ApiManagements.list" class="btn btn-info" align="center">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>

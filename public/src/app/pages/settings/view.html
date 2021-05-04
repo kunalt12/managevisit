@@ -1,0 +1,34 @@
+<div class="widgets">
+  <div class="row">
+    <div class="col-md-6">
+      <div
+          ba-panel
+          ba-panel-title="Edit Settings"
+          ba-panel-class="with-scroll">
+            <form class="form-validation" ng-submit="updateSetting(add_form)" role="form" name="add_form">
+                <div class="form-group">
+                    <label>Admin Email<code>*</code></label>
+                    <input placeholder="Please enter admin email" type="text" class="form-control" name="admin_email" 
+                        required-error-message="{{errorMessage.admin_email.required}}" focus-me
+                        minlength-error-message="{{errorMessage.admin_email.minlength}}" 
+                        maxlength-error-message="{{errorMessage.admin_email.maxlength}}" 
+                        email-error-message="{{errorMessage.admin_email.invalidEmail}}" 
+                        validator="required, minlength=2, maxlength=100, email" valid-method="blur" ng-model="formscope.admin_email" />
+                </div>
+
+                <div class="form-group">
+                    <label>Confirm link expired Time(Hours)<code>*</code></label>
+                    <input placeholder="Please enter hours" type="text" class="form-control" name="confirm_link_expired" 
+                        required-error-message="{{errorMessage.confirm_link_expired.required}}" 
+                        minlength-error-message="{{errorMessage.confirm_link_expired.minlength}}" 
+                        maxlength-error-message="{{errorMessage.confirm_link_expired.maxlength}}" 
+                        validator="required, minlength=1, maxlength=3" chars="numbers"
+                        valid-method="blur" ng-model="formscope.confirm_link_expired" />
+                </div>
+
+                <button type="submit" class="btn btn-info" ng-disabled="isSubmitted" align="center">{{action}}</button>
+            </form>
+      </div>
+    </div>
+  </div>
+</div>

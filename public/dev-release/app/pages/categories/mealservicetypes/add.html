@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="col-md-6">
+        <div ba-panel ba-panel-title="{{pageName}}" ba-panel-class="with-scroll">
+            <form ng-submit="add_data(add_form)" role="form" name="add_form">
+                <div class="form-group">
+                    <label>Name<code>*</code></label>
+                    <input type="text" ng-model="formscope.name" name="name" class="form-control" placeholder="Please enter service type"
+                        required-error-message="{{errorMessage.name.required}}"  focus-me
+                        minlength-error-message="{{errorMessage.name.minlength}}"  
+                        maxlength-error-message="{{errorMessage.name.maxlength}}" 
+                        validator="required, minlength=2, maxlength=50" valid-method="blur" chars="letters"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="form-control" placeholder="Please enter description" ng-model="formscope.description" name="description"
+                    maxlength-error-message="{{errorMessage.description.maxlength}}" 
+                    validator="maxlength=500" valid-method="blur" chars="alpha-numeric"
+                    ></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Type<code>*</code></label>
+                    <div class="input-demo radio-demo row">
+                        <div class="col-md-2">
+                            <label class="radio-inline custom-radio nowrap">
+                                <input type="radio" ng-model="formscope.type" name="type" id="inlineRadio1" value="1">
+                                <span>Free</span>
+                            </label>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="radio-inline custom-radio nowrap">
+                                <input type="radio" ng-model="formscope.type" name="type" id="inlineRadio2" value="2">
+                                <span>Paid</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" ng-if="formscope.type == '2'">
+                    <label>Cost (Per Person)<code>*</code></label>
+                    <input type="text" ng-model="formscope.cost" name="cost" class="form-control" 
+                        placeholder="Please enter cost" chars="only-numbers"
+                        required-error-message="{{errorMessage.cost.required}}" 
+                        minlength-error-message="{{errorMessage.cost.minlength}}"  
+                        maxlength-error-message="{{errorMessage.cost.maxlength}}" 
+                        validator="required, minlength=1, maxlength=5" valid-method="blur">
+                </div>
+
+                <div class="form-group">
+                    <label>Status</label>
+                    <select chosen
+                        ng-model="formscope.status" name="status" 
+                        ng-options=" status.value as status.text for status in statusData"
+                        class="form-control"></select>
+                </div>
+                
+                <button type="submit" ng-disabled="isSubmitted" class="btn btn-success" align="center">{{btnName}}</button>
+                <a type="submit" ui-sref="mealsvalue.mealservicetypes.list" class="btn btn-info" align="center">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>

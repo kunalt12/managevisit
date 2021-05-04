@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col-xs-12 col-sm-12" ba-panel ba-panel-class="popular-app medium-panel">
+        <div class="popular-app-cost row">
+            <div class="col-xs-9">
+                Total Tours
+            </div>
+            <div class="col-xs-3 text-right popular-app-info-font-color">
+                <a type="submit" ui-sref="tours.list" title="View Tour list" align="center">{{totalTour}}</a>
+            </div>
+        </div>
+        <div class="popular-app-info row">
+            <div class="form-group col-xs-6 col-sm-4 col-md-3 col-lg-2 text-center" ng-repeat="(key, value) in tourFilterData">
+                <div class="info-label">{{ key.replace("_", " ").replace("_", " "); }}</div>
+                <div ng-if="$index != 5" class="popular-app-info-font-color"><a href="#/tours/list?id={{$index+1}}"> {{ value }} </a></div>
+                <div ng-if="$index == 5" class="popular-app-info-font-color">{{ value }}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div ba-panel ba-panel-title="Upcoming tours">
+            <div class="form-group select-page-size-wrap ">
+                <button class="btn btn-primary" ng-if="havePermission('tours','create');" ui-sref="tours.add">Add Tour</button>
+            </div>
+            <div class="horizontal-scroll">
+                <table datatable="" dt-instance="$parent.dtInstance" dt-options="dtOptions" dt-columns="dtColumns" class="row-border hover"></table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12" ba-panel ba-panel-title="Tour Schedule" ba-panel-class="xmedium-panel feed-comply-panel with-scroll calendar-panel">
+        <dashboard-calendar></dashboard-calendar>
+    </div>
+</div>
+
+<div class="row pie-charts" ng-if="charts.length">
+    <div class="pie-chart-item-container" ng-repeat="chart in charts">
+        <div ba-panel>
+            <div class="pie-chart-item">
+                <div class="ion-ios-people chart" data-pack="ios" data-tags="stalker, person, users, head, human" style="display: inline-block;font-size: 75px;"></div>
+                <div class="description">
+                    <div>{{ chart.role_name }}</div>
+                    <div class="description-stats">{{ chart.count }}</div>
+                </div>
+                <!--<i class="chart-icon i-{{ ::chart.icon }}"></i>-->
+            </div>
+        </div>
+    </div>
+</div>

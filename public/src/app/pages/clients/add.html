@@ -1,0 +1,171 @@
+<div class="widgets">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div ba-panel ba-panel-title="{{pageName}}" ba-panel-class="with-scroll">
+                <div class="ng-cloak">
+                    <form class="form-validation" role="form" name="add_form">
+                        <div class="row">
+                            <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                                <label for="input01">Email<code>*</code></label>
+                                <input focus-me type="email" class="form-control" ng-model="formscope.email" placeholder="Please enter email" name="email" 
+                                    ng-if="state.current.name == 'clients.add'" 
+                                    required-error-message="{{errorMessage.email.required}}" email-error-message="{{errorMessage.email.invalidEmail}}"
+                                    minlength-error-message="{{errorMessage.email.minlength}}" maxlength-error-message="{{errorMessage.email.maxlength}}" 
+                                    validator="required, email, minlength=2, maxlength=100" valid-method="blur">
+                                <span ng-if="state.current.name == 'clients.edit'">{{formscope.email}}</span>
+                            </div>
+
+                            <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                                <label>Client Type<code>*</code></label>
+                                <select chosen ng-model="formscope.user_type" name="user_type" ng-options="company.id as company.name for company in clientTypeOption" 
+                                    class="form-control" validation-group="user_type_error_message" 
+                                    required-error-message="{{errorMessage.user_type.required}}"
+                                    validator="required" valid-method="watch, blur"></select>
+                                <span id="user_type_error_message"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-lg-4 col-md-12 col-sm-12">
+                                <label for="input01">First Name </label>
+                                <input type="text" class="form-control" ng-model="formscope.first_name" placeholder="Please enter first name" name="first_name" chars="letters">
+                            </div>
+
+                            <div class="form-group col-lg-4 col-md-12 col-sm-12">
+                                <label for="input01">Middle Name </label>
+                                <input type="text" class="form-control" ng-model="formscope.middle_name" placeholder="Please enter middle name" name="middle_name" chars="letters">
+                            </div>
+
+                            <div class="form-group col-lg-4 col-md-12 col-sm-12">
+                                <label for="input01">Last Name</label>
+                                <input type="text" class="form-control" ng-model="formscope.last_name" placeholder="Please enter Last name" name="last_name" chars="letters">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                                <label>Date of Birth(YYYY-MM-DD)</label>
+                                <input my-date type="text" class="form-control" ng-model="formscope.dob" placeholder="Please select the birth date" name="dob">
+                                <!--<div class=""
+                          moment-picker="formscope.dob"
+                          start-view="day"
+                          min-date="minDateMoment"
+                          format="YYYY-MM-DD">
+                          <input class="form-control"
+                              readonly name="dob"
+                              placeholder="Please select the birth date"
+                              ng-model="formscope.dob"
+                              ng-model-options="{ updateOn: 'blur' }">
+                      </div>-->
+                            </div>
+
+                            <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                                <label for="textarea01">Gender</label>
+                                <select chosen ng-model="formscope.gender" name="gender" ng-options="company.value as company.label for company in genderOption" class="form-control"></select>
+                            </div>
+                        </div>
+
+                        <!--<div class="form-group col-md-12">
+                <div class="form-group col-md-6" ng-if="state.current.name == 'clients.add'">
+                    <label for="input02">Password</label>
+                    <input type="password" class="form-control" ng-model="formscope.password" placeholder="Please enter password"
+                      disallow-spaces name="password"
+                      required-error-message="{{errorMessage.password.required}}" 
+                      maxlength-error-message="{{errorMessage.password.maxlength}}" 
+                      minlength-error-message="{{errorMessage.password.minlength}}"
+                      validator="required, maxlength=20, minlength=6" valid-method="blur">
+                </div>
+                <div class="form-group col-md-6" ng-if="state.current.name == 'clients.add'">
+                    <label for="input02">Confirm Password<code>*</code></label>
+                    <input type="password" class="form-control" ng-model="formscope.confirm_password" placeholder="Please enter confirm password"
+                      required-error-message="{{errorMessage.confirm_password.required}}" 
+                      validator="required, confirmPassword" valid-method="blur" name="confirm_password">
+                </div>
+              </div>-->
+
+                        <div class="row">
+                            <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                                <label for="input04">Phone Number</label>
+                                <input type="text" class="form-control" ng-model="formscope.phone_number" placeholder="Please enter your phone number" phone-input name="phone_number">
+                            </div>
+
+                            <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                                <label for="input04">Mobile Number</label>
+                                <input type="text" class="form-control" ng-model="formscope.mobile" placeholder="Please enter your mobile number" phone-input name="mobile">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                                <label>Street 1</label>
+                                <input type="text" class="form-control" ng-model="formscope.address" placeholder="Please enter Street 1" name="address">
+                            </div>
+
+                            <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                                <label>Street 2</label>
+                                <input type="text" class="form-control" ng-model="formscope.address1" placeholder="Please enter Street 2" name="address1">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                                <label>Country</label>
+                                <select chosen ng-model="formscope.country_id" name="country_id" ng-options="country.id as country.country_name for country in countries" class="form-control"></select>
+                            </div>
+
+                            <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                                <label>State</label>
+                                <input type="text" class="form-control" ng-model="formscope.state" placeholder="Please enter state name" name="state">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                                <label>City</label>
+                                <input type="text" class="form-control" ng-model="formscope.city" placeholder="Please enter city name" name="city">
+                            </div>
+
+                            <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                                <label>Zip Code</label>
+                                <input type="text" placeholder="Please enter zip code" class="form-control" name="zip_code" ng-model="formscope.zip_code" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                                <label for="textarea01">Status<code>*</code></label>
+                                <select chosen ng-model="formscope.status" name="status" ng-options="status.value as status.label for status in statusOption" required-error-message="{{errorMessage.status.required}}" validator="required" valid-method="watch, blur" class="form-control" validation-group="status_error_message"></select>
+                                <span id="status_error_message"></span>
+                            </div>
+
+                            <div class="form-group col-lg-6">
+                                <label>Profile Picture</label>
+                                <input ng-if="state.current.name == 'clients.add'" type="file" ng-model="formscope.profile_pic" ngf-accept="'image/*'" name="profile_pic" ngf-select ngf-max-size="2MB" ngf-validate="{size: {min: 1, max: '2MB'}, pattern: 'image/*'}" />
+                                <input ng-if="state.current.name == 'clients.edit'" type="file" ng-model="formscope.profile_pic" ngf-accept="'image/*'" name="profile_pic" ngf-select ngf-max-size="2MB" ngf-validate="{size: {min: 1, max: '2MB'}, pattern: 'image/*'}" />
+
+                                <label class="control-label has-error ng-scope colorred" ng-if="add_form.profile_pic.$error.required && add_form.profile_pic.$error.pattern != true && (add_form.profile_pic.$touched || Submitted)">{{errorMessage.image.required}}</label>
+                                <label class="control-label has-error ng-scope colorred" ng-if="add_form.profile_pic.$error.pattern">{{errorMessage.image.pdfFile}}</label>
+                                <label class="control-label has-error ng-scope colorred" ng-if="add_form.profile_pic.$error.maxSize">{{errorMessage.image.maxSize}}</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-lg-6">
+                                <button ng-if="state.current.name == 'clients.edit'" ng-click="add_data(add_form)" ng-disabled="isSubmitted" class="btn btn-success" align="center">
+                                    <i class="fa fa-spinner fa-spin" aria-hidden="true" ng-show="loginProgress"></i> 
+                                    {{btnName}}
+                                </button>
+                                <button ng-if="state.current.name == 'clients.add'" ng-click="mailModal(add_form)" ng-disabled="isSubmitted" class="btn btn-success" align="center">
+                                    <i class="fa fa-spinner fa-spin" aria-hidden="true" ng-show="loginProgress"></i> 
+                                    {{btnName}}
+                                </button>
+                                <a type="submit" ui-sref="clients.list" class="btn btn-info" align="center">Cancel</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

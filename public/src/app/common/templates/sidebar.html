@@ -1,0 +1,233 @@
+<section class="sidebar">
+    <ul class="sidebar-menu">
+        <li class="treeview" ui-sref-active="active" ng-if="havePermission('dashboard', 'view');">
+            <a ui-sref="dashboard">
+                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+            </a>
+        </li>
+
+        <li class="treeview" ng-if="havePermission('roles', 'view');" ng-class="{active: ('roles' | includedByState) || ('add-roles' | includedByState) || ('edit-roles' | includedByState)}">
+            <a ui-sref="roles">
+                <i class="fa fa-tasks"></i> <span>Roles</span>
+            </a>
+        </li>
+
+        <li class="treeview" 
+            ng-class="{active: ('company' | includedByState) || ('add-company' | includedByState) || ('edit-company' | includedByState) || 
+            ('users' | includedByState) || ('add-users' | includedByState) || ('edit-users' | includedByState) ||
+            ('agents' | includedByState) || ('add-agents' | includedByState) || ('edit-agents' | includedByState) ||
+            ('payee-agents' | includedByState) || ('add-payee-agents' | includedByState) || ('edit-payee-agents' | includedByState) ||
+            ('web-users' | includedByState) || ('add-web-users' | includedByState) || ('edit-web-users' | includedByState)}" 
+            ng-if="(havePermission('admin', 'view')) || (havePermission('supersubadmin', 'view')) || (havePermission('agent', 'view')) || (havePermission('payeeagent', 'view')) || (havePermission('webuser', 'view'))">
+            <a href="#">
+                <i class="fa fa-users"></i><span>Users</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li ng-if="havePermission('admin', 'view');" ng-class="{active: ('company' | includedByState) || ('add-company' | includedByState) || ('edit-company' | includedByState)}">
+                    <a ui-sref="company">
+                        <i class="fa fa-building"></i> <span>Companies</span>
+                    </a>
+                </li>
+
+                <li ng-if="havePermission('supersubadmin', 'view');" ng-class="{active: ('users' | includedByState) || ('add-users' | includedByState) || ('edit-users' | includedByState)}">
+                    <a ui-sref="users">
+                        <i class="fa fa-user-secret"></i> <span>Super Sub Admin</span>
+                    </a>
+                </li>
+
+                <li ng-class="{active: ('agents' | includedByState) || ('add-agents' | includedByState) || ('edit-agents' | includedByState)}" ng-if="havePermission('agent', 'view');">
+                    <a ui-sref="agents">
+                        <i class="fa fa-users"></i> <span>Agents</span>
+                    </a>
+                </li>
+                <li ng-class="{active: ('payee-agents' | includedByState) || ('add-payee-agents' | includedByState) || ('edit-payee-agents' | includedByState)}" ng-if="havePermission('payeeagent', 'view');">
+                    <a ui-sref="payee-agents">
+                        <i class="fa fa-user"></i> <span>Payee Agents</span>
+                    </a>
+                </li>
+                <li ng-class="{active: ('web-users' | includedByState) || ('add-web-users' | includedByState) || ('edit-web-users' | includedByState)}" ng-if="havePermission('webuser', 'view');">
+                    <a ui-sref="web-users">
+                        <i class="fa fa-user-plus"></i> <span>Web Users</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="treeview" ng-if="(havePermission('banks', 'view')) || (havePermission('branch', 'view'))"
+            ng-class="{active: ('banks' | includedByState) || ('add-banks' | includedByState) || ('edit-banks' | includedByState) ||
+            ('bankbranchs' | includedByState) || ('add-bankbranchs' | includedByState) || ('edit-bankbranchs' | includedByState)
+            }"
+            >
+            <a href="#">
+                <i class="fa fa-user"></i><span>Bank</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <!--ng-if="havePermission('banks','view');"-->
+                <li ng-class="{active: ('banks' | includedByState) || ('add-banks' | includedByState) || ('edit-banks' | includedByState)}" ng-if="havePermission('banks', 'view');">
+                    <a ui-sref="banks">
+                        <i class="fa fa-circle-o"></i> <span>Bank</span>
+                    </a>
+                </li>
+                <!--ng-if="havePermission('bankbranchs','view');"-->
+                <li ng-class="{active: ('bankbranchs' | includedByState) || ('add-bankbranchs' | includedByState) || ('edit-bankbranchs' | includedByState)}" ng-if="havePermission('branch', 'view');">
+                    <a ui-sref="bankbranchs">
+                        <i class="fa fa-circle-o"></i> <span>Bank Branches</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="treeview" ng-class="{active: ('message-broadcast' | includedByState)}" ng-if="havePermission('messagebroadcast', 'view');">
+            <a ui-sref="message-broadcast">
+                <i class="fa fa-edit"></i><span>Message Broadcast</span>
+            </a>
+        </li>
+
+        <li class="treeview" ng-class="{active: ('transaction' | includedByState) || ('add-transaction' | includedByState) || ('edit-transaction' | includedByState)}" ng-if="havePermission('transaction', 'view');">
+            <a ui-sref="transaction">
+                <i class="fa fa-transgender"></i> <span>Transaction</span>
+            </a>
+        </li>
+
+        <li class="treeview" ng-class="{active: ('cheque' | includedByState) || ('view-cheque' | includedByState)}" ng-if="havePermission('cheque', 'view');">
+            <a ui-sref="cheque">
+                <i class="fa fa-clone"></i> <span>Cheque</span>
+            </a>
+        </li>
+
+        <li class="treeview" ng-class="{active: ('report' | includedByState) || ('cheque-report' | includedByState)}" ng-if="havePermission('transaction', 'view');">
+            <a href="#">
+                <i class="fa fa-book"></i><span>Report</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li ng-class="{active: ('report' | includedByState)}" ng-if="havePermission('transaction', 'view');">
+                    <a ui-sref="report">
+                        <i class="fa fa-circle-o"></i> <span>Transaction Report</span>
+                    </a>
+                </li>
+                <li ng-class="{active: ('cheque-report' | includedByState)}" ng-if="havePermission('transaction', 'view');">
+                    <a ui-sref="cheque-report">
+                        <i class="fa fa-circle-o"></i> <span>Cheque Report</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <!--<li class="treeview" ng-class="{active: ('report' | includedByState)}" ng-if="havePermission('transaction', 'view');">
+            <a ui-sref="report">
+                <i class="fa fa-book"></i> <span>Report</span>
+            </a>
+        </li>-->
+
+        <li class="treeview" ng-class="{active: ('sales' | includedByState)}" ng-if="havePermission('transaction', 'view');">
+            <a ui-sref="sales">
+                <i class="fa fa-file"></i> <span>Sales</span>
+            </a>
+        </li>
+
+        <li class="treeview" ng-class="{active: ('commission' | includedByState)}" ng-if="havePermission('transaction', 'view');">
+            <a ui-sref="commission">
+                <i class="fa fa-money"></i> <span>Commission</span>
+            </a>
+        </li>
+
+        <li class="treeview" ng-class="{active: ('service-location' | includedByState) || ('add-service-location' | includedByState) || ('edit-service-location' | includedByState)}" ng-if="havePermission('servicelocation', 'view') || hasRole('admin');">
+            <a ui-sref="service-location">
+                <i class="fa fa-location-arrow"></i> <span> Service Location</span>
+            </a>
+        </li>
+        <li class="treeview" ng-if="havePermission('servicelocation', 'search');" ng-class="{active: ('search-service' | includedByState)}">
+            <a ui-sref="search-service">
+                <i class="fa fa-search "></i> <span>Search Service Availability</span>
+            </a>
+        </li>
+
+        <li class="treeview" ng-class="{active: ('feedbacks' | includedByState) || ('add-feedbacks' | includedByState) || ('edit-feedbacks' | includedByState) || ('details-feedbacks' | includedByState)}" ng-if="havePermission('feedbacks', 'view');">
+            <a ui-sref="feedbacks">
+                <i class="fa fa-transgender"></i> <span> Feedback</span>
+            </a>
+        </li>
+
+        <li class="treeview" ng-if="havePermission('banks', 'view');" ng-class="{active: ('ofac_search' | includedByState)}">
+            <a ui-sref="ofac_search">
+                <i class="fa fa-search "></i> <span>OFAC Search</span>
+            </a>
+        </li>
+        <li class="treeview" ng-if="havePermission('transactionlimitrequest', 'view');" ng-class="{active: ('transaction-limit-request' | includedByState)}">
+            <a ui-sref="transaction-limit-request">
+                <i class="fa fa-search "></i> <span>Transaction Limit Request</span>
+            </a>
+        </li>
+        <li class="treeview" ng-if="(havePermission('aboutus', 'view')) || (havePermission('termsandconditions', 'view'))"
+            ng-class="{active: ('aboutus' | includedByState) || ('edit-aboutus' | includedByState) ||
+                ('terms-conditions' | includedByState) || ('edit-terms-conditions' | includedByState) ||
+                ('contactus' | includedByState) ||
+                ('add-contactus' | includedByState) ||
+                ('policy' | includedByState) || ('offers' | includedByState) || ('add-offers' | includedByState)
+                || ('edit-offers' | includedByState)}">
+            <a href="#">
+                <i class="fa fa-info"></i><span>System Information</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li ng-class="{active: ('aboutus' | includedByState) || ('edit-aboutus' | includedByState)}" ng-if="havePermission('aboutus', 'view');">
+                    <a ui-sref="aboutus"><i class="fa fa-circle-o"></i>About Us</a>
+                </li>
+                <li ng-class="{active: ('terms-conditions' | includedByState) || ('edit-terms-conditions' | includedByState)}" ng-if="havePermission('termsandconditions', 'view');">
+                    <a ui-sref="terms-conditions"><i class="fa fa-circle-o"></i>Terms & Conditions</a>
+                </li>
+                <li ng-class="{active: ('contactus' | includedByState) }" ng-if="(havePermission('contactus', 'view') || havePermission('contactus', 'create'));">
+                    <a ui-sref="contactus" ng-if="hasRole('admin')">
+                        <i class="fa fa-circle-o"></i> <span>Contact Us</span>
+                    </a>
+                    <a ui-sref="add-contactus" ng-class="{ active : ('add-contactus' | includedByState)}" ng-if="!hasRole('admin')">
+                        <i class="fa fa-circle-o"></i> <span>Contact Us</span>
+                    </a>
+                </li>
+                <li ng-class="{active: ('policy' | includedByState) }" ng-if="havePermission('privacyandpolicy', 'view');" ng-class="{active: ('notifications' | includedByState)}">
+                    <a ui-sref="policy">
+                        <i class="fa fa-circle-o"></i> <span>Privacy Policy</span>
+                    </a>
+                </li>
+                <li class="treeview" ng-if="havePermission('offerandpromotion', 'view');" ng-class="{active: ('offers' | includedByState) || ('add-offers' | includedByState) || ('edit-offers' | includedByState)}">
+                    <a ui-sref="offers">
+                        <i class="fa fa-circle-o"></i> <span>Offers and Promotion</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="treeview" ng-if="havePermission('notifications', 'view');" ng-class="{active: ('notifications' | includedByState)}">
+            <a ui-sref="notifications">
+                <i class="fa fa-search "></i> <span>Notifications</span>
+            </a>
+        </li>
+        <li class="treeview" ng-if="havePermission('currencyconvertorrate', 'view');" ng-class="{active: ('currency' | includedByState)}">
+            <a ui-sref="currency">
+                <i class="fa fa-search "></i> <span>Currency Convert</span>
+            </a>
+        </li>
+
+        <li class="treeview" ng-class="{active: ('beneficiaries-users' | includedByState) || ('sender-users' | includedByState)}">
+            <a href="#">
+                <i class="fa fa-user"></i><span>Transaction Users</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li ng-class="{active: ('beneficiaries-users' | includedByState)}">
+                    <a ui-sref="beneficiaries-users">
+                        <i class="fa fa-users "></i> <span>Beneficiary</span>
+                    </a>
+                </li>
+
+                <li ng-class="{active: ('sender-users' | includedByState)}">
+                    <a ui-sref="sender-users">
+                        <i class="fa fa-users "></i> <span>Sender Users</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</section>

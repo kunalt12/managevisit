@@ -1,0 +1,181 @@
+<div ba-panel ba-panel-class="profile-page">
+  <div class="panel-content">
+    <div class="progress-info"><b>{{formscope.roles.name}}</b> Client</div>
+    
+
+    <h3 class="with-line">General Information</h3>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group row clearfix">
+          <label for="inputFirstName" class="col-sm-3 control-label">Picture</label>
+
+          <div class="col-sm-9">
+            <!-- This is a class so no need to change from user to client -->
+            <div class="userpic"> 
+              <div class="userpic-wrapper">
+                <img ng-src="{{ imageUrl }}">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group row clearfix">
+          <label for="inputFirstName" class="col-sm-3 control-label">First Name</label>
+
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="inputFirstName" disabled value="{{formscope.first_name}}">
+          </div>
+        </div>
+        <div class="form-group row clearfix">
+          <label for="inputLastName" class="col-sm-3 control-label">Last Name</label>
+
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="inputLastName" disabled value="{{formscope.last_name}}">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group row clearfix">
+          <label class="col-sm-3 control-label">Gender</label>
+
+          <div class="col-sm-9">
+            <select ng-model="formscope.gender" name="gender" disabled ng-options="company.value as company.label for company in genderOption" 
+                    class="form-control"></select>
+          </div>
+        </div>
+
+        <div class="form-group row clearfix">
+          <label for="inputOccupation" class="col-sm-3 control-label">Birth Date</label>
+
+          <div class="col-sm-9">
+            <!--<input type="text" class="form-control" id="inputOccupation" ng-model="formscope.dob" date disabled value="{{formscope.dob}}">-->
+            <div class=""
+                disable="true"
+                ng-disabled="true"
+                moment-picker="formscope.dob"
+                min-date="minDateMoment"
+                format="DD-MMMM-YYYY">
+                <input class="form-control"
+                    readonly 
+                    name="dob"
+                    ng-model="formscope.dob">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="with-line">Contact Information</h3>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group row clearfix">
+          <label for="inputEmail3" class="col-sm-3 control-label">Email</label>
+
+          <div class="col-sm-9">
+            <input type="email" class="form-control" id="inputEmail3" disabled value="{{formscope.email}}">
+          </div>
+        </div>
+        <div class="form-group row clearfix">
+          <label for="inputRoom" class="col-sm-3 control-label">Address</label>
+
+          <div class="col-sm-9">
+            <textarea placeholder="Please enter address" disabled class="form-control" ng-model="formscope.address" name="address"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group row clearfix">
+            <label for="inputPhone" class="col-sm-3 control-label">Phone</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" ng-model="formscope.phone_number" id="inputPhone" phone-input disabled value="{{formscope.phone_number}}">
+            </div>
+        </div>
+        <div class="form-group row clearfix">
+          <label for="inputPhone" class="col-sm-3 control-label">Mobile</label>
+          <div class="col-sm-9">
+              <input type="text" class="form-control" ng-model="formscope.mobile" disabled phone-input name="mobile" value="{{formscope.mobile}}">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--<h3 class="with-line">Social Profiles</h3>
+
+    <div class="social-profiles row clearfix">
+      <div class="col-md-3 col-sm-4" ng-repeat="item in socialProfiles">
+
+        <a class="sn-link" href ng-click="showModal(item)" ng-if="!item.href">
+          <i class="socicon {{ item.icon }}"></i>
+          <span>{{ item.name }}</span>
+        </a>
+
+        <a class="sn-link connected" href="{{ item.href }}" target="_blank" ng-if="item.href">
+          <i class="socicon {{ item.icon }}"></i>
+          <span>{{ item.name }}</span>
+          <em class="ion-ios-close-empty sn-link-close" ng-mousedown="unconnect(item)"></em>
+        </a>
+      </div>
+    </div>
+
+    <h3 class="with-line">Send Email Notifications</h3>
+
+    <div class="notification row clearfix">
+      <div class="col-sm-6">
+        <div class="form-group row clearfix">
+          <label class="col-xs-8">When I receive a message</label>
+
+          <div class="col-xs-4">
+            <switch color="primary" ng-model="switches[0]"></switch>
+          </div>
+        </div>
+        <div class="form-group row clearfix">
+          <label class="col-xs-8">When Someone sends me an invitation</label>
+
+          <div class="col-xs-4">
+            <switch color="primary" ng-model="switches[1]"></switch>
+          </div>
+        </div>
+        <div class="form-group row clearfix">
+          <label class="col-xs-8">When profile information changes</label>
+
+          <div class="col-xs-4">
+            <switch color="primary" ng-model="switches[2]"></switch>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group row clearfix">
+          <label class="col-xs-8">When anyone logs into your account from a new device or browser</label>
+
+          <div class="col-xs-4">
+            <switch color="primary" ng-model="switches[3]"></switch>
+          </div>
+        </div>
+        <div class="form-group row clearfix">
+          <label class="col-xs-8">Weekly Reports</label>
+
+          <div class="col-xs-4">
+            <switch color="primary" ng-model="switches[4]"></switch>
+          </div>
+        </div>
+
+        <div class="form-group row clearfix">
+          <label class="col-xs-8">Daily Reports</label>
+
+          <div class="col-xs-4">
+            <switch color="primary" ng-model="switches[5]"></switch>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="btn btn-primary btn-with-icon save-profile">
+      <i class="ion-android-checkmark-circle"></i>Update Profile
+    </button>-->
+  </div>
+</div>

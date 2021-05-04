@@ -1,0 +1,211 @@
+<div ng-controller="HeaderCtrl">
+
+    <div ng-if="auth_user">
+        <cc-auto-refresh-fn refresh-fn="refreshList()" refresh-interval="refreshOpts.interval" refresh-model="list" refresh-paused="refreshOpts.paused"
+            refresh-busy="refreshBusy" refresh-on-refreshed="setLastRefreshed(eventArgs)">
+        </cc-auto-refresh-fn>
+    </div>
+        <!-- Logo -->
+        <a ui-sref="dashboard" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"></span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b><img src="images/TranZLanta_LOGO.png" alt="Tranzlanta"/></b></span>
+            <!--<span ng-if="!company.company_name" class="logo-lg"><b><img src="images/TranZLanta_LOGO.png" alt="Tranzlanta"/></b></span>
+            <span ng-if="company.company_name" class="logo-lg"><b ng-bind="company.company_name"></b></span>-->
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <a class="logo1">
+                <span ng-if="company.company_name" class="logo-lg"><b ng-bind="company.company_name"></b></span>
+            </a>
+            <!-- Sidebar toggle button-->
+            <!-- <a class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a> -->
+
+            <!-- Navbar Right Menu -->
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <!-- Tasks: style can be found in dropdown.less -->
+                    <!--<li class="dropdown messages-menu">
+                        <a ui-sref="track-transaction" ng-click="getRecentMessage()" class="dropdown-toggle" data-toggle="dropdown" ng-disabled="refreshBusy">
+                            <i class="fa fa-eye"></i>
+                            <span class="label label-success" ng-if="notifications.message > 0">{{notifications.message}}</span>
+                        </a>
+                    </li>-->
+
+                    <!-- Tasks: style can be found in dropdown.less -->
+                    <li class="dropdown messages-menu"  ng-if="state.current.name != 'track-transaction'">
+                        <a href="#" ng-click="getRecentMessage()" class="dropdown-toggle" data-toggle="dropdown" ng-disabled="refreshBusy" title="Track Transaction">
+                            <i class="fa fa-eye"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <div class="box-body">
+                                <div class="row">
+                                    <form ng-submit="submitTransaction(track_transaction)" role="form" name="track_transaction">
+                                        <div class="col-xs-12">
+                                            <div class="form-group">
+                                                <label>Select user type<code>*</code></label>
+                                                <select chosen inherit-select-classes="true" ng-model="transaction.user_type" validator="required" valid-method="blur" name="user_type" 
+                                                    validation-group="user_type_error_message" required-error-message="{{transactionMessage.user_type.required}}" 
+                                                    ng-options=" type.value as type.text for type in userType" class="form-control"
+                                                    ng-change="checkManualValidation(track_transaction,'user_type')">
+                                                </select>
+                                                <span id="user_type_error_message"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="form-group">
+                                                <label>Transaction number<code>*</code></label>
+                                                <input placeholder="Please enter transaction number" type="text" class="form-control"  name="number"
+                                                    required-error-message="{{transactionMessage.number.required}}" 
+                                                    validator="required" valid-method="blur" ng-model="transaction.number" chars="text"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <div class="form-group">
+                                                <label>Sender phone number<code>*</code></label>
+                                                <input placeholder="Please enter sender phone number" type="text" class="form-control"  name="phone_number" phone-input 
+                                                    required-error-message="{{transactionMessage.sender_phone_number.required}}"  
+                                                    maxlength-error-message="{{transactionMessage.sender_phone_number.maxlength}}" 
+                                                    validator="required, maxlength=15" 
+                                                    valid-method="blur" ng-model="transaction.phone_number" />
+                                            </div>
+                                        </div>
+                                     
+                                        <div class="col-xs-12">
+                                            <button type="submit" class="btn btn-info" ng-disabled="isSubmitted" align="center">Track Transaction</button>
+                                            <a type="submit"  ng-click="transaction={user_type: null};resetTransactionForm(track_transaction)"  class="dropdown-toggle btn btn-info" data-toggle="dropdown" align="center">Cancel</a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Tasks: style can be found in dropdown.less -->
+                    <li class="dropdown messages-menu">
+                        <a href="#" ng-click="getRecentMessage()" class="dropdown-toggle" data-toggle="dropdown" ng-disabled="refreshBusy">
+                            <i class="fa fa-envelope-o"></i>
+                            <span class="label label-success" ng-if="notifications.message > 0">{{notifications.message}}</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header text-center">
+                                <span ng-if="notifications.message > 0">You have new {{notifications.message}} new messages</span>
+                                <span ng-if="notifications.message == 0">You don't have any new message</span>
+                            </li>
+                            <li>
+                                <!-- inner menu: contains the actual data -->
+                                <!--<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 200px;">-->
+                                <ul class="menu">
+                                    <li ng-repeat="sender in message_list">
+                                        <!-- start message -->
+                                        <a href="#">
+                                            <div class="pull-left">
+                                                <img src="assets/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                            </div>
+                                            <h4>
+                                                {{ sender.message_broadcast.user.name }}
+                                                <small><i class="fa fa-clock-o"></i><span am-time-ago="sender.message_broadcast.created_at | amUtc | amLocal"></span></small>
+                                            </h4>
+                                            <p>{{ sender.message_broadcast.message | cut : true:30 }}</p>
+                                        </a>
+                                    </li>
+                                    <!-- end message -->
+                                </ul>
+                                <!--</div>-->
+                            </li>
+                            <li class="footer" ng-if="message_list.length">
+                                <a href="javascript:void(0);" ui-sref="message-broadcast-view" >See All Messages</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- Notifications: style can be found in dropdown.less -->
+                    <li class="dropdown notifications-menu">
+                        <a href="#" ng-click="getRecentNotification()" class="dropdown-toggle" data-toggle="dropdown" ng-disabled="refreshBusy">
+                            <i class="fa fa-bell-o"></i>
+                            <span class="label label-warning" ng-if="notifications.notification > 0">{{notifications.notification}}</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header text-center">
+                                <span ng-if="notifications.notification > 0"> have {{notifications.notification}} new notifications</span>
+                                <span ng-if="notifications.notification == 0">You don't have any new notification</span>
+                            </li>
+                            <li>
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu">
+                                    <li ng-repeat="notification in notification_list">
+                                        <!--<a ui-sref="{{notification.replace_message.url}}">
+                                            <small><i class="fa fa-clock-o"></i><span am-time-ago="notification.created_at | amUtc | amLocal"></span></small>{{notification.replace_message.message}}
+                                        </a>-->
+                                        
+                                        <a ui-sref="{{notification.replace_message.url}}">
+                                            <p style="margin: 0 0 0px;">{{notification.replace_message.message | cut : true:40 }}</p>
+                                            <small style="float: right; font-size: 70%;"><i class="fa fa-clock-o" style="margin-right: 2px;"></i> <span am-time-ago="notification.created_at | amUtc | amLocal"></span></small>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="footer" ng-if="notification_list.length">
+                                <a ui-sref="notifications" href="#">View all notifications</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- User Account: style can be found in dropdown.less -->
+                    <li class="dropdown user user-menu">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="assets/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                            <span class="hidden-xs">{{auth_user.name}}</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- User image -->
+                            <li class="user-header">
+                                <img src="assets/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+
+                                <p>
+                                    {{auth_user.name}} - 
+                                    <span ng-repeat="(key, value) in role">
+                                        {{value | capitalize}}
+                                    </span>
+                                    <small>Member since - {{auth_user.created_at | amUtc | amLocal | amDateFormat:'MMMM, YYYY'}}</small>
+                                </p>
+                                <!--<p>{{auth_user.name}}</p>-->
+                            </li>
+                            <!-- Menu Body -->
+                            <!-- <li class="user-body">
+                                <div class="col-xs-4 text-center">
+                                    <a href="#">Followers</a>
+                                </div>
+                                <div class="col-xs-4 text-center">
+                                    <a href="#">Sales</a>
+                                </div>
+                                <div class="col-xs-4 text-center">
+                                    <a href="#">Friends</a>
+                                </div>
+                            </li> -->
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                    <a ui-sref="me" class="btn btn-default btn-flat">Settings</a>
+                                </div>
+                                <div class="pull-right">
+                                    <a class="btn btn-default btn-flat" ng-click="logout()" ng-disabled="logoutInProgress" ng-bind="logoutInProgress ? 'Signing out...' : 'Sign Out'">Sign out</a>
+                                </div>
+                            </li>
+                            <!-- Control Sidebar Toggle Button -->
+                            <!-- <li>
+                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                    </li> -->
+                        </ul>
+                    </li>
+                    <li class="">
+                        <a ng-click="toggleModal()">
+                            <i class="fa fa-question"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+</div>

@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-md-6">
+        <div ba-panel="" ba-panel-title="{{pageName}}" ba-panel-class="with-scroll">
+            <form ng-submit="add_data(add_form)" role="form" name="add_form">
+                <div class="form-group">
+                    <label>Email Subject<code>*</code></label>
+                    <input type="text" ng-model="formscope.title" name="title" class="form-control" placeholder="Please enter email templates name" required-error-message="{{errorMessage.title.required}}" focus-me="" minlength-error-message="{{errorMessage.title.minlength}}" maxlength-error-message="{{errorMessage.title.maxlength}}" validator="required, minlength=2, maxlength=50" valid-method="blur" chars="letters"> </div>
+                <div class="form-group">
+                    <label>Email Action</label>
+                    <select chosen="" ng-model="formscope.emailtype" name="emailtype" ng-options="email.value as email.text for email in emailtypeOption" class="form-control" ng-change="checkManualValidation()" valid-method="watch,blur"></select>
+                    <!-- <span id="status_error_message"></span> -->
+                </div>
+                <div class="mail-checkbox" style="margin-bottom: 15px;">
+                    <label class="checkbox-inline custom-checkbox nowrap">
+                        <input type="checkbox" ng-model="formscope.is_default" ng-disabled="isDisabled">
+                        <span>Mark as default</span>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea class="form-control" placeholder="Please enter templates code here" ng-model="formscope.html_code" name="html_code" validator="required" valid-method="blur" chars="text"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select chosen="" ng-model="formscope.status" name="status" ng-options="email.value as email.text for email in statusData" class="form-control"></select>
+                </div>
+                <button type="submit" ng-disabled="isSubmitted" class="btn btn-success" align="center">{{btnName}}</button> <a type="submit" ui-sref="categories.emailtemplates.list" class="btn btn-info" align="center">Cancel</a></form>
+        </div>
+    </div>
+</div>

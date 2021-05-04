@@ -1,0 +1,26 @@
+<div class="modal-content" ng-if="displayEditor">
+    <div class="modal-header">
+        <h4 class="modal-title text-center" id="myModalLabel">Acknowledge Tour Mail Confirmation</h4>
+    </div>
+    <div class = "row" style="margin-left: 0px; margin-right: 0px;">
+        <div class = "form-group col-xs-8 pull-right">
+            <div class="row"><div class="col-sm-4" style="margin-top: 1rem; text-align: right;padding-right: 0px;">
+                    <label> Select Template </label></div>
+                <div class="col-sm-8"><select ng-change="filerdatatable()" ng-model="formData.filterData" name="filterData" ng-options="email.id as email.title for email in emailTemplates" class="form-control"></select></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-body">
+        <div>
+            <label>Mail Subject</label>
+            <input type="text" placeholder="Please enter mail subject" ng-model="formscope.mailSubject" class="form-control">
+        </div>
+        <div style="margin-top: 10px;">
+            <label style="display: block;">Mail Body</label>
+            <text-angular placeholder="Please enter mail body" name="mailContent" ng-model="formscope.mailContent" ta-toolbar="[['h1','h2','h3','h4','h5','h6','p'],['bold','italics','underline']]"></text-angular>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="row col-md-12 text-center"><a type="submit" ng-click="sendMail()" class="btn btn-success">Send Mail</a> <a type="submit" ng-click="donotsendMail()" class="btn btn-danger">Do Not Send Mail</a></div>
+    </div>
+</div>

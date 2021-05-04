@@ -1,0 +1,102 @@
+<div class="widgets">
+    <div class="viewTourMain">
+        <div class="message">
+            <div class="row">
+                <div class="col-md-12">
+                    <div ba-panel ba-panel-class="">
+                        <div class="person-info">
+                            <button ui-sref="clients.list" type="button" class="back-button btn btn-default btn-with-icon pull-right"><i class="ion-chevron-left"></i>Back</button>
+                            <img ng-src="{{ imageUrl }}" class="human-picture" style="margin-top: -3%;">
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                                <h3 class="with-line">General Information</h3>
+                                <div class="form-group row clearfix">
+                                    <label class="col-xs-3">Name:</label>
+                                    <div class="col-xs-9">{{formscope.name || '-'}}</div>
+                                </div>
+
+                                <div class="form-group row clearfix">
+                                    <label class="col-xs-3">Gender:</label>
+                                    <div class="col-xs-9">{{showGender(formscope.gender) || '-'}}</div>
+                                </div>
+
+                                <div class="form-group row clearfix">
+                                    <label class="col-xs-3">Birth Date:</label>
+                                    <div class="col-xs-9">{{formscope.dob | amDateFormat:'DD, MMMM YYYY' || '-'}}</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                                <h3 class="with-line">Contact Information</h3>
+                                <div class="form-group row clearfix">
+                                    <label class="col-xs-3">Email:</label>
+                                    <div class="col-xs-9">{{formscope.email || '-'}}</div>
+                                </div>
+
+                                <div class="form-group row clearfix">
+                                    <label class="col-xs-3">Mobile:</label>
+                                    <div class="col-xs-9">{{formscope.mobile || '-'}}</div>
+                                </div>
+
+                                <div class="form-group row clearfix">
+                                    <label class="col-xs-3">Phone Number:</label>
+                                    <div class="col-xs-9">{{formscope.phone_number || '-'}}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                                <h3 class="with-line">Address Information</h3>
+                                <div class="form-group row clearfix">
+                                    <label class="col-xs-3">Street 1:</label>
+                                    <div class="col-xs-9">{{formscope.address || '-'}}</div>
+                                </div>
+
+                                <div class="form-group row clearfix">
+                                    <label class="col-xs-3">Street 2:</label>
+                                    <div class="col-xs-9">{{formscope.address1 || '-'}}</div>
+                                </div>
+
+                                <div class="form-group row clearfix">
+                                    <label class="col-xs-3">City:</label>
+                                    <div class="col-xs-9">{{formscope.city || '-'}}</div>
+                                </div>
+
+                                <div class="form-group row clearfix">
+                                    <label class="col-xs-3">State:</label>
+                                    <div class="col-xs-9">{{formscope.state || '-'}}</div>
+                                </div>
+
+                                <div class="form-group row clearfix">
+                                    <label class="col-xs-3">Country:</label>
+                                    <div class="col-xs-9">{{formscope.country.country_name || '-'}}</div>
+                                </div>
+
+                                <div class="form-group row clearfix">
+                                    <label class="col-xs-3">Zip Code:</label>
+                                    <div class="col-xs-9">{{formscope.zip_code || '-'}}</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                                <h3 class="with-line">Professional Information</h3>
+                                <div class="form-group row clearfix">
+                                    <label class="col-xs-3">Client Type:</label>
+                                    <div class="col-xs-9">{{formscope.role_name || '-'}}</div>
+                                </div>
+
+                                <div class="form-group row clearfix">
+                                    <label class="col-xs-3">Join Date:</label>
+                                    <div class="col-xs-9">{{formscope.created_at | amDateFormat:'DD, MMMM YYYY' || '-'}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

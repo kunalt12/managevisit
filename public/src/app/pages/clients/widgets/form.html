@@ -1,0 +1,70 @@
+<div class="ng-cloak" ng-controller="ClientsCtrl as selectpickerVm">
+    <form>
+    <div class="form-group col-md-6">
+        <label for="input01">First Name</label>
+        <input type="text" class="form-control" id="input01" placeholder="Please enter first name">
+    </div>
+    
+    <div class="form-group col-md-6">
+        <label for="input01">Last Name</label>
+        <input type="text" class="form-control" id="input01" placeholder="Please enter Last name">
+    </div>
+
+    <div class="form-group col-md-12">
+        <label for="input01">Email</label>
+        <input type="text" class="form-control" id="input01" placeholder="Please enter email">
+    </div>
+    
+    <div class="form-group col-md-12">
+        <label for="input02">Password</label>
+        <input type="password" class="form-control" id="input02" placeholder="Please enter password">
+        <!--<span class="help-block sub-little-text">Password must be (Number and Characters)</span>-->
+    </div>
+    <div class="form-group col-md-12">
+        <label for="input02">Confirm Password</label>
+        <input type="password" class="form-control" id="input02" placeholder="Please enter confirm password">
+    </div>
+
+    <div class="form-group col-md-12">
+        <label for="input04">Phone Number</label>
+        <input type="text" class="form-control" id="input04" placeholder="Please enter your phone number">
+        <!--<span class="help-block sub-little-text">A block of help text that breaks onto a new line and may extend beyond one line.</span>-->
+    </div>
+
+    <div class="form-group col-md-12">
+        <label for="textarea01">Address</label>
+        <textarea placeholder="Please enter address" class="form-control" id="textarea01"></textarea>
+    </div>
+
+    <div class="form-group col-md-12">
+        <label for="textarea01">Gender</label>
+        <ui-select ng-model="selectpickerVm.gender.selected"
+                class="btn-group bootstrap-select form-control"
+                ng-disabled="false"
+                append-to-body="true"
+                search-enabled="false">
+        <ui-select-match placeholder="Please select gender">
+            <span> {{$select.selected.label}}</span>
+        </ui-select-match>
+        <ui-select-choices repeat="standardItem in genderOption">
+            <span ng-bind-html="standardItem.label"></span>
+        </ui-select-choices>
+        </ui-select>
+    </div>
+    <div class="form-group col-md-12">
+        <label for="textarea01">Client Type</label>
+        <ui-select ng-model="selectpickerVm.user_type.selected"
+                class="btn-group bootstrap-select form-control"
+                ng-disabled="false"
+                append-to-body="true"
+                search-enabled="false">
+        <ui-select-match placeholder="Please select type">
+            <span> {{$select.selected.label}}</span>
+        </ui-select-match>
+        <ui-select-choices repeat="standardItem in userTypeOption">
+            <span ng-bind-html="standardItem.label"></span>
+        </ui-select-choices>
+        </ui-select>
+    </div>
+    </form>
+</div>

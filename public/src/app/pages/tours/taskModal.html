@@ -1,0 +1,19 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
+      <em class="ion-ios-close-empty sn-link-close"></em>
+    </button>
+        <h4 class="modal-title" id="myModalLabel">Add Task</h4>
+    </div>
+    <form name="linkForm">
+        <div class="modal-body">
+            <div class="form-group">
+                <input type="text" focus-me class="form-control" placeholder="Please add task" chars="text" maxlength="50" ng-model="task">
+            </div>
+            <span style='color:red;' ng-if="message"> {{message}} </span>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" ng-click="ok(task)">Add Task</button>
+        </div>
+    </form>
+</div>

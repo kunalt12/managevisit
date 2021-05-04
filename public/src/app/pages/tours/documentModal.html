@@ -1,0 +1,32 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="$dismiss()" aria-label="Close">
+      <em class="ion-ios-close-empty sn-link-close"></em>
+    </button>
+        <h4 class="modal-title" id="myModalLabel">{{titleName}}</h4>
+    </div>
+    <form ng-submit="add_data(add_form)" role="form" name="add_form">
+        <div class="modal-body">
+            <div class="row col-md-12">
+                <div class="form-group col-md-6">
+                    <label>Document Title<code>*</code></label>
+                    <input focus-me type="text" class="form-control" ng-model="formdocscope.title" placeholder="Document title" name="title" 
+                        required-error-message="{{errorMessage.title.required}}" 
+                        minlength-error-message="{{errorMessage.title.minlength}}" 
+                        maxlength-error-message="{{errorMessage.title.maxlength}}"
+                        validator="required, minlength=2, maxlength=50" valid-method="blur">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Document Link<code>*</code></label>
+                    <input type="text" class="form-control" ng-model="formdocscope.link" placeholder="http://example.com" name="link" 
+                        required-error-message="{{errorMessage.link.required}}" 
+                        url-error-message="{{errorMessage.link.error}}"
+                        validator="required, link" valid-method="blur">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" ng-disabled="isSubmitted" class="btn btn-success" align="center">{{btnName}}</button>
+        </div>
+    </form>
+</div>
