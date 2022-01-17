@@ -12,6 +12,7 @@
     function ListDefaulttasksCtrl($scope, fileReader, $filter, $uibModal, $rootScope, $compile, TourtypesFactory, DefaulttasksFactory, $timeout) {
         TourtypesFactory.getAllRecords().success(function (t) {
             $scope.formscope = t.data
+            // Test commit for checking if the same git repository exists on devgulp server.
         }).error(function (e) {
             Notification.error(e.error), $state.go("defaulttasks.list")
         })
